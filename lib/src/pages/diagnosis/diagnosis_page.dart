@@ -90,7 +90,7 @@ class DiagnosisPage extends StatelessWidget {
     );
   }
 
-  _startDiagnosis(BuildContext context) {
+  _startDiagnosis(BuildContext context) async {
     final blocController = BlocProvider.of(context);
 
     blocController.setRecordState('start');

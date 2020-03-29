@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lie_to_app/src/bloc/bloc_provider.dart';
-import 'package:lie_to_app/src/pages/home/diagnosis_page.dart';
-import 'package:lie_to_app/src/pages/home/preview_page.dart';
-import 'package:lie_to_app/src/pages/home/results_page.dart';
-import 'package:lie_to_app/src/pages/info_page.dart';
+import 'package:lie_to_app/src/pages/diagnosis/diagnosis_page.dart';
+import 'package:lie_to_app/src/pages/diagnosis/preview_page.dart';
+import 'package:lie_to_app/src/pages/diagnosis/results_page.dart';
+import 'package:lie_to_app/src/pages/home/info_page.dart';
+import 'package:lie_to_app/src/pages/home/tutorial_page.dart';
 import 'package:lie_to_app/src/pages/main_page.dart';
-import 'package:lie_to_app/src/pages/tutorial_page.dart';
 import 'package:lie_to_app/src/preferences/user_prefs.dart';
  
 void main() async{

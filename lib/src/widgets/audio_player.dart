@@ -4,7 +4,6 @@ import 'dart:typed_data' show Uint8List;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:lie_to_app/src/providers/cloud_api.dart';
 import 'package:path_provider/path_provider.dart' show getTemporaryDirectory;
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' show DateFormat;
