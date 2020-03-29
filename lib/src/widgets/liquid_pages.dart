@@ -119,7 +119,7 @@ Container _page3() {
           Expanded(child: Container()),
           Text('¿Cómo funciona?', style: titleStyle, textAlign: TextAlign.center,),
           SizedBox( height: 10.0 ),
-          Text('Con una Inteligencia Artificial y Redes Neuronales entrenadas para analizar múltiples patrones de comportamiento y fisiológicos que revelan cuándo una persona miente', style: subtitleStyle, textAlign: TextAlign.justify,),
+          Text('Con Inteligencia Artificial y Redes Neuronales entrenadas en el reconocimiento de múltiples patrones de comportamiento y fisiológicos que revelan cuándo una persona miente', style: subtitleStyle, textAlign: TextAlign.justify,),
           Expanded(child: Container()),      
         ],
       ),

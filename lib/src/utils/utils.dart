@@ -124,8 +124,66 @@ Widget background4() {
           borderRadius: BorderRadius.circular(80.0),
           gradient: LinearGradient(
             colors: [
-              Color.fromRGBO(232, 156, 139, 1.0),
-              Color.fromRGBO(247, 104, 72, 1.0),
+              Color.fromRGBO(232, 139, 147, 0.6),
+              Color.fromRGBO(237, 88, 102, 0.6),
+            ]
+          )
+        ),
+      )
+    )
+  );
+
+  return Stack(
+    children: <Widget>[
+      _gradient(),
+      pinkBox,
+    ],
+  );
+}
+
+Widget background5() {
+  final pinkBox = Positioned(
+    top: -100.0,
+    child: Transform.rotate(
+      angle: -pi / 5.0,
+      child: Container(
+        height: 360.0,
+        width: 360.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(80.0),
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(232, 139, 147, 0.8),
+              Color.fromRGBO(237, 88, 102, 0.8),
+            ]
+          )
+        ),
+      )
+    )
+  );
+
+  return Stack(
+    children: <Widget>[
+      _gradient(),
+      pinkBox,
+    ],
+  );
+}
+
+Widget background6() {
+  final pinkBox = Positioned(
+    top: -100.0,
+    child: Transform.rotate(
+      angle: -pi / 5.0,
+      child: Container(
+        height: 360.0,
+        width: 360.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(80.0),
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(232, 139, 147, 1.0),
+              Color.fromRGBO(237, 88, 102, 1.0),
             ]
           )
         ),
@@ -210,9 +268,9 @@ showNiceDialog(BuildContext context, String title, String text, callback, String
   );
 }
 
-Widget backButton(BuildContext context) {
+Widget backButton(BuildContext context, {callback}) {
   return InkWell(
-    onTap: () => Navigator.pop(context),
+    onTap: callback == null ? () => Navigator.pop(context) : () => callback(),
     child: Icon(
       Icons.arrow_back_ios, size: 35, color: Colors.white,
     ),

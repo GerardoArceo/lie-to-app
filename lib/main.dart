@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lie_to_app/src/bloc/bloc_provider.dart';
 import 'package:lie_to_app/src/pages/home/diagnosis_page.dart';
+import 'package:lie_to_app/src/pages/home/preview_page.dart';
+import 'package:lie_to_app/src/pages/home/results_page.dart';
 import 'package:lie_to_app/src/pages/info_page.dart';
 import 'package:lie_to_app/src/pages/main_page.dart';
 import 'package:lie_to_app/src/pages/tutorial_page.dart';
@@ -37,6 +39,8 @@ class MyApp extends StatelessWidget {
           'info': (BuildContext context) => InfoPage(),
           'tutorial': (BuildContext context) => TutorialPage(),
           'diagnosis': (BuildContext context) => DiagnosisPage(),
+          'preview': (BuildContext context) => PreviewPage(),
+          'results': (BuildContext context) => ResultsPage(),
         },
       ),
     );

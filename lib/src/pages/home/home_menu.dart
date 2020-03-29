@@ -12,7 +12,7 @@ class HomeMenu extends StatelessWidget {
     return Stack(
       children: <Widget>[
         background1(),
-        Column(
+        ListView(
           children: <Widget>[
             _title(),
             BigButton(() => Navigator.pushNamed(context, 'diagnosis'), 'assets/img/ai.png', 'Detectar mentiras'),
@@ -28,7 +28,7 @@ class HomeMenu extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text('Lie to App', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
             SizedBox(height: 20.0,),

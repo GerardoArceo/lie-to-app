@@ -1,19 +1,20 @@
 import 'dart:ui';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_text/gradient_text.dart';
 
 class BigButton extends StatelessWidget {
 
-  final callback, image, text;
-  BigButton(this.callback, this.image, this.text);
+  final callback, image, text, animate;
+  BigButton(this.callback, this.image, this.text, {this.animate = false});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      margin: EdgeInsets.all(15.0),
+      margin: EdgeInsets.all(35.0),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -34,10 +35,15 @@ class BigButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     SizedBox( height: 5.0 ),
+                    
                     CircleAvatar(
                       backgroundColor: Colors.transparent,
                       radius: 80.0,
-                      child: Image(image: AssetImage(image),),
+                      child: Flash(
+                        animate: animate,
+                        infinite: true,
+                        child: Image(image: AssetImage(image),),
+                      ),
                     ),
                     GradientText(
                       text,

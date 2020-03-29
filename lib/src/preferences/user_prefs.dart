@@ -16,6 +16,9 @@ class UserPrefs {
     this._prefs = await SharedPreferences.getInstance();
   }
 
+
+  
+
   get darkTheme {
     return _prefs.getBool('darkTheme') ?? true;
   }
@@ -40,13 +43,5 @@ class UserPrefs {
 
   set showInitialInfo(bool value) {
     _prefs.setBool('showInitialInfo', value);
-  }
-
-  get indexMenu {
-    return _prefs.getInt('indexMenu') ?? 0;
-  }
-
-  set indexMenu(int value) {
-    _prefs.setInt('indexMenu', value);
   }
 }

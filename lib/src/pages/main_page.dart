@@ -3,12 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:lie_to_app/src/bloc/bloc_provider.dart';
 import 'package:lie_to_app/src/preferences/user_prefs.dart';
-import 'package:liquid_swipe/Constants/Helpers.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
 
 import 'games/games_menu.dart';
 import 'home/home_menu.dart';
 import 'settings/settings_menu.dart';
+
+final _menus = [
+  HomeMenu(),
+  GamesMenu(),
+  SettingsMenu(),
+];
 
 class MainPage extends StatefulWidget {
   @override
@@ -19,13 +23,6 @@ class _MainPageState extends State<MainPage> {
 
   final prefs = new UserPrefs();
 
-  List<Container> _menus = [
-    Container(child: HomeMenu()),
-    Container(child: GamesMenu()),
-    Container(child: SettingsMenu()),
-  ];
-
-  Widget liquid;
   int _currentIndex = 0;
 
   @override
@@ -33,20 +30,10 @@ class _MainPageState extends State<MainPage> {
 
     _initStreams();
 
-    if (liquid == null) {
-      liquid = LiquidSwipe(
-        pages: _menus,
-        initialPage: prefs.indexMenu,
-        waveType: WaveType.circularReveal,
-        onPageChangeCallback: (c){setState(() {_currentIndex = c;});},
-        currentUpdateTypeCallback: (c){},
-      );
-    }
-
     return Scaffold(
-      body:Stack(
+      body: Stack(
         children: <Widget>[
-          liquid,
+          _menus[_currentIndex],
           _indicator(context),
         ],
       ),
@@ -62,6 +49,9 @@ class _MainPageState extends State<MainPage> {
     } else {
       blocController.setSessionState('active');
     }
+
+    blocController.setLoadingState(false);
+    blocController.setRecordState('stop');
   }
 
   Widget _indicator(BuildContext context) {
@@ -69,8 +59,6 @@ class _MainPageState extends State<MainPage> {
     return StreamBuilder(
       stream: blocController.bluetoothStream,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
-        print('BLUETUT');
-        print(snapshot.data);
         return SafeArea(
           child: Container(
             padding: EdgeInsets.all(10.0),
@@ -92,23 +80,10 @@ class _MainPageState extends State<MainPage> {
       ),
       child: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: (int index) async {
-
-          liquid = _menus[index];
-          _currentIndex = index;
-          setState(() {});
-          await new Future.delayed(const Duration(milliseconds : 50));
-
-          liquid = LiquidSwipe(
-            pages: _menus,
-            initialPage: _currentIndex,
-            waveType: WaveType.circularReveal,
-            onPageChangeCallback: (c){setState(() {_currentIndex = c;});},
-            currentUpdateTypeCallback: (c){},
-          );
-          setState(() {});
-
-
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
         },
         fixedColor: Colors.pink,
         items: <BottomNavigationBarItem>[

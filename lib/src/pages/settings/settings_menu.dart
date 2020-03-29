@@ -17,7 +17,7 @@ class SettingsMenu extends StatelessWidget {
     return Stack(
       children: <Widget>[
         background3(),
-        Column(
+        ListView(
           children: <Widget>[
             _title(),
             _roundedButtons(context),
@@ -32,7 +32,7 @@ class SettingsMenu extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text('Ajustes', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
             SizedBox(height: 20.0,),

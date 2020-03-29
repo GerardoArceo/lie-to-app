@@ -11,7 +11,7 @@ class GamesMenu extends StatelessWidget {
     return Stack(
       children: <Widget>[
         background2(),
-        Column(
+        ListView(
           children: <Widget>[
             _title(),
             _roundedButtons(),
@@ -26,7 +26,7 @@ class GamesMenu extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text('Juegos de la verdad', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
             SizedBox(height: 20.0,),
