@@ -16,13 +16,7 @@ class DiagnosisPage extends StatelessWidget {
       body:Stack(
         children: <Widget>[
           background4(),
-          SafeArea(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: backButton(context, callback: () => Navigator.pushNamed(context, 'main')),
-            ),
-          ),
-          Column(
+          ListView(
             children: <Widget>[
               _title(),
               // Expanded(child: Container()),
@@ -44,6 +38,7 @@ class DiagnosisPage extends StatelessWidget {
               AudioRecorder(),
             ],
           ),
+          backButton(context, callback: () => Navigator.pushNamed(context, 'main')),
         ],
       ),
     );

@@ -45,7 +45,7 @@ class HomeMenu extends StatelessWidget {
         TableRow(
           children: [
             RoundedButton(() => Navigator.pushReplacementNamed(context, 'info'), Colors.blue, icon: Icons.info_outline, text: '¿Lie to App?'),
-            RoundedButton(() => Navigator.pushReplacementNamed(context, 'tutorial'), Colors.purpleAccent, icon: Icons.live_help, text: 'Tutorial'),
+            RoundedButton(() => Navigator.pushReplacementNamed(context, 'tutorial'), Color.fromRGBO(236, 98, 188, 1.0), icon: Icons.live_help, text: 'Tutorial'),
           ]
         ),
       ],

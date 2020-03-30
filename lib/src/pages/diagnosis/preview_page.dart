@@ -20,13 +20,7 @@ class PreviewPage extends StatelessWidget {
       body:Stack(
         children: <Widget>[
           background5(),
-          SafeArea(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: backButton(context),
-            ),
-          ),
-          Column(
+          ListView(
             children: <Widget>[
               _title(),
               AudioPlayer(),
@@ -46,6 +40,7 @@ class PreviewPage extends StatelessWidget {
               ),
             ],
           ),
+          backButton(context),
         ],
       ),
     );
@@ -60,7 +55,7 @@ class PreviewPage extends StatelessWidget {
             SizedBox(height: 20.0,),
             Text('Lecturas', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
             SizedBox(height: 20.0,),
-            Text('¿Listo para conocer la verdad?', style: TextStyle(color: Colors.white, fontSize: 18.0))
+            Text('Estás muy cerca de la verdad', style: TextStyle(color: Colors.white, fontSize: 18.0))
           ],
         ),
       ),

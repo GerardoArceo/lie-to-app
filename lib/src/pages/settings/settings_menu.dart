@@ -60,8 +60,8 @@ class SettingsMenu extends StatelessWidget {
         ),
         TableRow(
           children: [
-            _settingsButton(context),
             _infoButton(context),
+            _settingsButton(context),
           ]
         ),
       ],
@@ -74,16 +74,23 @@ class SettingsMenu extends StatelessWidget {
       stream: blocController.bluetoothStream,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
         if (snapshot.hasData && snapshot.data) {
-          return RoundedButton(() => blocController.setBluetoothState(false), Colors.blueAccent, icon: Icons.settings_bluetooth, text: 'Configurar gadget');
+          Function f = () {
+            blocController.setBluetoothState(false);
+          };
+          return RoundedButton(f, Colors.blueAccent, icon: Icons.settings_bluetooth, text: 'Configurar gadget');
         } else {
-          return RoundedButton(() => blocController.setBluetoothState(true), Colors.blueAccent, icon: Icons.bluetooth_disabled, text: 'Conectar gadget');
+          Function f = () {
+            // _scanDevices();
+            blocController.setBluetoothState(true);
+          };
+          return RoundedButton(f, Colors.blueAccent, icon: Icons.bluetooth_disabled, text: 'Conectar gadget');
         }
       },
     );
   }
 
   Widget _accountButton(context) {
-
+    final _color = Color.fromRGBO(194, 126, 158, 1.0);
     final blocController = BlocProvider.of(context);
 
     return StreamBuilder(
@@ -92,7 +99,7 @@ class SettingsMenu extends StatelessWidget {
         if (!snapshot.hasData || snapshot.data == 'inactive') {
           return RoundedButton(
             () => utils.signIn(context),
-            Colors.teal, 
+            _color, 
             icon: Icons.account_box, 
             text: 'Iniciar Sesión'
           );
@@ -104,28 +111,29 @@ class SettingsMenu extends StatelessWidget {
                   blocController.setSessionState('inactive');
                   signOutGoogle();
                 };
-                utils.showNiceDialog(context, 'Hola $name', 'En este momento tienes una sesión iniciada con el email $email', callback, 'Cerrar Sesión');
+                utils.showNiceDialog(context, 'Sesión activa', 'Hola $name, en este momento tienes una sesión activa', callback, 'Cerrar Sesión');
               },
-              Colors.teal,
+              _color,
               text: '$name',
               backgroundImage: NetworkImage(imageUrl,),
             );
           } else {
             return RoundedButton(
               () => utils.signIn(context),
-              Colors.teal,
+              _color,
               icon: Icons.account_box, 
               text: 'Mi Cuenta',
             );
           }
         } else {
-          return RoundedButton((){},Colors.teal, icon: Icons.radio_button_checked, text: 'Cargando...');
+          return RoundedButton((){},_color, icon: Icons.radio_button_checked, text: 'Cargando...');
         }
       },
     );
   }
 
   Widget _historyButton(BuildContext context) {
+    final _color = Color.fromRGBO(255, 156, 99, 1.0);
     final blocController = BlocProvider.of(context);
     return StreamBuilder(
       stream: blocController.sesionStream,
@@ -136,14 +144,15 @@ class SettingsMenu extends StatelessWidget {
         } else if (snapshot.data == 'active'){
           f = () => print('HOLA MUNDO');
         } else {
-          return RoundedButton((){},Colors.pinkAccent, icon: Icons.radio_button_checked, text: 'Cargando...');
+          return RoundedButton((){}, _color, icon: Icons.radio_button_checked, text: 'Cargando...');
         }
-        return RoundedButton(f, Colors.pinkAccent, icon: Icons.account_box, text: 'Historial');
+        return RoundedButton(f, _color, icon: Icons.book, text: 'Historial');
       },
     );
   }
 
   Widget _statsButton(BuildContext context) {
+    final _color = Color.fromRGBO(124, 188, 153, 1.0);
     final blocController = BlocProvider.of(context);
     return StreamBuilder(
       stream: blocController.sesionStream,
@@ -154,31 +163,33 @@ class SettingsMenu extends StatelessWidget {
         } else if (snapshot.data == 'active'){
           f = () => print('HOLA MUNDO');
         } else {
-          return RoundedButton((){},Colors.orange, icon: Icons.radio_button_checked, text: 'Cargando...');
+          return RoundedButton((){}, _color, icon: Icons.radio_button_checked, text: 'Cargando...');
         }
-        return RoundedButton(f, Colors.orange, icon: Icons.pie_chart_outlined, text: 'Estadísticas');
+        return RoundedButton(f, _color, icon: Icons.pie_chart_outlined, text: 'Estadísticas');
       },
     );
   }
 
+  Widget _infoButton(context) {
+    final _color = Color.fromRGBO(255, 100, 87, 1.0);
+    return RoundedButton(
+      () => utils.showNiceDialog(context, 'Lie to App', 'www.gerardoarceo.com' , () => {}, 'TQM'), 
+      _color, 
+      icon: Icons.perm_device_information, 
+      text: 'Información'
+    );
+  }
+
   Widget _settingsButton(context) {
+    final _color = Color.fromRGBO(97, 120, 140, 1.0);
     return RoundedButton(
       (){
         prefs.darkTheme = !prefs.darkTheme;
         Navigator.pushNamed(context, 'main');
       },
-      Colors.grey,
+      _color,
       icon: Icons.settings_applications, 
       text: 'Configuración'
-    );
-  }
-
-  Widget _infoButton(context) {
-    return RoundedButton(
-      () => utils.showNiceDialog(context, 'Lie to App', 'www.gerardoarceo.com' , () => {}, 'TQM'), 
-      Colors.deepOrangeAccent, 
-      icon: Icons.perm_device_information, 
-      text: 'Información'
     );
   }
 

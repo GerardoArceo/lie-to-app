@@ -28,7 +28,6 @@ class _AudioState extends State<AudioPlayer> {
 
   double sliderCurrentPosition = 0.0;
   double maxDuration = 1.0;
-  t_MEDIA _media = t_MEDIA.FILE;
   t_CODEC _codec = t_CODEC.CODEC_AAC;
 
   bool _encoderSupported = true; // Optimist
@@ -319,6 +318,8 @@ class _AudioState extends State<AudioPlayer> {
         Container(
             height: 30.0,
             child: Slider(
+              inactiveColor: Colors.indigo,
+              activeColor: Colors.pink,
                 value: sliderCurrentPosition,
                 min: 0.0,
                 max: maxDuration,

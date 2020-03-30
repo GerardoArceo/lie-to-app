@@ -30,7 +30,7 @@ class GamesMenu extends StatelessWidget {
           children: <Widget>[
             Text('Juegos de la verdad', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
             SizedBox(height: 20.0,),
-            Text('Ahora saber la verdad es más divertido', style: TextStyle(color: Colors.white, fontSize: 18.0))
+            Text('Saber la verdad es divertido', style: TextStyle(color: Colors.white, fontSize: 18.0))
           ],
         ),
       ),
@@ -43,19 +43,19 @@ class GamesMenu extends StatelessWidget {
         TableRow(
           children: [
             RoundedButton(() => {}, Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.question_answer, text: 'Verdad o reto'),
-            RoundedButton(() => {}, Colors.deepPurpleAccent, icon: Icons.adjust, text: 'Ruleta Rusa'),
+            RoundedButton(() => {}, Color.fromRGBO(96, 102, 199, 1.0), icon: Icons.fingerprint, text: 'Crímenes'),
           ]
         ),
         TableRow(
           children: [
-            RoundedButton(() => {}, Colors.amber, icon: Icons.account_box, text: 'Preguntas en familia'),
-            RoundedButton(() => {}, Colors.red, icon: Icons.favorite, text: 'Preguntas en pareja'),
+            RoundedButton(() => {}, Color.fromRGBO(255, 143, 0, 1.0), icon: Icons.account_box, text: 'Preguntas en familia'),
+            RoundedButton(() => {}, Color.fromRGBO(245, 5, 78, 1.0), icon: Icons.favorite, text: 'Preguntas en pareja'),
           ]
         ),
         TableRow(
           children: [
-            RoundedButton(() => {}, Colors.lightGreen, icon: Icons.people, text: 'Modo fiesta'),
-            RoundedButton(() => {}, Colors.cyan, icon: Icons.local_play, text: 'Modo random'),
+            RoundedButton(() => {}, Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.people, text: 'Modo fiesta'),
+            RoundedButton(() => {}, Color.fromRGBO(229, 80, 145, 1.0), icon: Icons.local_play, text: 'Modo random'),
           ]
         ),
       ],

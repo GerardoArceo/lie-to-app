@@ -6,8 +6,9 @@ import 'package:animate_do/animate_do.dart';
 final titleStyle = TextStyle(fontSize: 55.0, color: Colors.white );
 final subtitleStyle = TextStyle(fontSize: 25.0, color: Colors.white, fontStyle: FontStyle.italic);
 final textStyle = TextStyle(fontSize: 15.0, color: Colors.white );
+final littleStyle = TextStyle(fontSize: 10.0, color: Colors.white );
 
-Container _page1() {
+Container page1() {
   return Container(
     width: double.infinity,
     height: double.infinity,
@@ -54,7 +55,7 @@ Container _page1() {
               ),
               Expanded(child: Container()),
               Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.all(8),
                 child: Row(
                   children: <Widget>[
                     Dance(
@@ -68,7 +69,11 @@ Container _page1() {
                       ),
                     ),
                     Expanded(child: Container()),
-                    Text('Desliza para avanzar', style: textStyle),
+                    Pulse(
+                      delay: Duration(seconds: 4),
+                      infinite: true,
+                      child: Text('Desliza para avanzar', style: littleStyle)
+                    ),
                     Expanded(child: Container()),
                     Dance(
                       infinite: true,
@@ -146,7 +151,7 @@ Container _page4() {
 }
 
 final liquidPages = [
-  _page1(),
+  page1(),
   _page2(),
   _page3(),
   _page4(),

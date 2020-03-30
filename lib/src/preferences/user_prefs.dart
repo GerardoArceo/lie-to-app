@@ -16,9 +16,6 @@ class UserPrefs {
     this._prefs = await SharedPreferences.getInstance();
   }
 
-
-  
-
   get darkTheme {
     return _prefs.getBool('darkTheme') ?? true;
   }
@@ -27,7 +24,6 @@ class UserPrefs {
     _prefs.setBool('darkTheme', value);
   }
 
-
   get uid {
     return _prefs.getString('uid') ?? null;
   }
@@ -35,7 +31,6 @@ class UserPrefs {
   set uid(String value) {
     _prefs.setString('uid', value);
   }
-
 
   get showInitialInfo {
     return _prefs.getBool('showInitialInfo') ?? true;

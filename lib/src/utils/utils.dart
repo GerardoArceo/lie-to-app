@@ -67,7 +67,7 @@ Widget background2() {
           gradient: LinearGradient(
             colors: [
               Color.fromRGBO(85, 190, 150, 1.0),
-              Color.fromRGBO(70, 226, 165, 1.0),
+              Color.fromRGBO(158, 226, 200, 1.0),
             ]
           )
         ),
@@ -95,8 +95,8 @@ Widget background3() {
           borderRadius: BorderRadius.circular(80.0),
           gradient: LinearGradient(
             colors: [
-              Color.fromRGBO(69, 86, 226, 1.0),
-              Color.fromRGBO(112, 122, 207, 1.0),
+              Color.fromRGBO(52, 72, 236, 1.0),
+              Color.fromRGBO(117, 131, 247, 1.0),
             ]
           )
         ),
@@ -271,8 +271,11 @@ showNiceDialog(BuildContext context, String title, String text, callback, String
 Widget backButton(BuildContext context, {callback}) {
   return InkWell(
     onTap: callback == null ? () => Navigator.pop(context) : () => callback(),
-    child: Icon(
-      Icons.arrow_back_ios, size: 35, color: Colors.white,
+    child: SafeArea(
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Icon( Icons.arrow_back_ios, size: 35, color: Colors.white,),
+      ),
     ),
   );
 }

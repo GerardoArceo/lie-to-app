@@ -27,18 +27,13 @@ class _ResultsPageState extends State<ResultsPage> {
       body:Stack(
         children: <Widget>[
           background6(),
-          SafeArea(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: backButton(context),
-            ),
-          ),
-          Column(
+          ListView(
             children: <Widget>[
               _title(),
               _body(context, args),
             ],
           ),
+          backButton(context),
         ],
       ),
     );
@@ -51,9 +46,8 @@ class _ResultsPageState extends State<ResultsPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 20.0,),
-            Text('Resultados', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
-            SizedBox(height: 20.0,),
-            Text('¿Listo para conocer la verdad?', style: TextStyle(color: Colors.white, fontSize: 18.0))
+            Text('Resultado', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
+            SizedBox(height: 40.0,),
           ],
         ),
       ),
@@ -63,7 +57,7 @@ class _ResultsPageState extends State<ResultsPage> {
     Widget _body(BuildContext context, Map result) {
       final blocController = BlocProvider.of(context);
 
-      final titleStyle = TextStyle(fontSize: 40.0, color: Colors.white);
+      final titleStyle = TextStyle(fontSize: 60.0, color: Colors.white);
       final textStyle = TextStyle(fontSize: 15.0, color: Colors.white, fontStyle: FontStyle.italic);
       
       if (result == null || result['ok'] == null || result['ok'] == false) {
@@ -84,6 +78,19 @@ class _ResultsPageState extends State<ResultsPage> {
         children: <Widget>[
           Text(result['result'], style: titleStyle, textAlign: TextAlign.center,),
           Text('Probabilidad de diagnóstico correcto: ' + result['interval'], style: textStyle, textAlign: TextAlign.center,),
+          SizedBox(height: 60,),
+
+          Table(
+            children: [
+              TableRow(
+                children: [
+                  RoundedButton(() => Navigator.pushNamed(context, 'main'), Colors.blueAccent, icon: Icons.home, text: 'Regresar al menú'),
+                  RoundedButton(() => Navigator.pushNamed(context, 'diagnosis'), Colors.teal, icon: Icons.restore_page, text: 'Nuevo diagnóstico'),
+                ]
+              ),
+            ],
+          ),
+          SizedBox(height: 20,),
 
           StreamBuilder(
             stream: blocController.sesionStream,
@@ -91,13 +98,12 @@ class _ResultsPageState extends State<ResultsPage> {
               if (snapshot == null || snapshot.data == false || prefs.uid == null) return Container();
               return Column(
                 children: <Widget>[
-                  SizedBox(height: 60,),
                   Text(_retroText, style: textStyle, textAlign: TextAlign.center,),
                   StreamBuilder(
                     stream: blocController.loadingStream,
                     builder: (BuildContext context, AsyncSnapshot snapshot){
                       if (snapshot.data == true) {
-                        return CircularProgressIndicator();
+                        return Column(children: [SizedBox(height: 20,), CircularProgressIndicator()]);
                       } else {
                         if (_resultSent == true) {
                           return Container();
@@ -119,19 +125,7 @@ class _ResultsPageState extends State<ResultsPage> {
               );
             }
           ),
-          
-
-          SizedBox(height: 60,),
-          Table(
-            children: [
-              TableRow(
-                children: [
-                  RoundedButton(() => Navigator.pushNamed(context, 'main'), Colors.blueAccent, icon: Icons.home, text: 'Regresar al menú'),
-                  RoundedButton(() => Navigator.pushNamed(context, 'diagnosis'), Colors.teal, icon: Icons.restore_page, text: 'Nuevo diagnóstico'),
-                ]
-              ),
-            ],
-          ),
+        
         ],
       ),
     );

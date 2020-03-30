@@ -8,7 +8,7 @@ import 'package:lie_to_app/src/pages/home/info_page.dart';
 import 'package:lie_to_app/src/pages/home/tutorial_page.dart';
 import 'package:lie_to_app/src/pages/main_page.dart';
 import 'package:lie_to_app/src/preferences/user_prefs.dart';
- 
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = new UserPrefs();

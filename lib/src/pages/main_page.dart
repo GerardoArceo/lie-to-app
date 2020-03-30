@@ -22,8 +22,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
   final prefs = new UserPrefs();
-
-  int _currentIndex = 0;
+  final PageController _pageController = PageController(initialPage: 0);
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,24 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          _menus[_currentIndex],
+          PageView.builder(
+            scrollDirection: Axis.horizontal,
+            controller: _pageController,
+            onPageChanged: _onPageChanged,
+            itemCount: _menus.length,
+            itemBuilder: (ctx, i) => _menus[i],
+          ),
           _indicator(context),
         ],
       ),
       bottomNavigationBar: _bottomNavigationBar(context),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
   }
 
   _initStreams() {
@@ -79,11 +91,13 @@ class _MainPageState extends State<MainPage> {
         )
       ),
       child: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: _currentPage,
         onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          _pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
         },
         fixedColor: Colors.pink,
         items: <BottomNavigationBarItem>[
@@ -102,6 +116,12 @@ class _MainPageState extends State<MainPage> {
         ]
       )
     );
+  }
+
+  _onPageChanged(int index) {
+    setState(() {
+      _currentPage = index;
+    });
   }
 
 }

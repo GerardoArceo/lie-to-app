@@ -31,8 +31,6 @@ class _AudioState extends State<AudioRecorder> {
   double maxDuration = 1.0;
   t_CODEC _codec = t_CODEC.CODEC_AAC;
 
-  bool _encoderSupported = true; // Optimist
-
   void _initializeExample(FlutterSound module) async {
     flutterSoundModule = module;
     flutterSoundModule.initializeMediaPlayer();
@@ -148,7 +146,19 @@ class _AudioState extends State<AudioRecorder> {
             ),
           ),
         ),
-        _isRecording ? LinearProgressIndicator(value: 100.0 / 160.0 * (this._dbLevel ?? 1) / 100, valueColor: AlwaysStoppedAnimation<Color>(Colors.green), backgroundColor: Colors.red) : Container(),
+        Text('Nivel de decibeles (DB): ${this._dbLevel != null ? this._dbLevel.round() : 0}',
+            style: TextStyle(
+              fontSize: 10.0,
+              color: Colors.white,
+            ),
+        ),
+        _isRecording ? 
+          LinearProgressIndicator(
+            value: 100.0 / 120.0 * (this._dbLevel ?? 1) / 100,
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.pink), 
+            backgroundColor: Colors.indigo
+          ) 
+        : Container(),
       ]);
     else recorderSection = Container();
 
