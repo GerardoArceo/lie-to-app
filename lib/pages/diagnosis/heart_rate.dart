@@ -41,7 +41,6 @@ class HeartRateView extends State<HeartRate>
       if (diagnosisOnProgress) {
         _toggle();
       } else {
-        diagnosisBloc.add(SetBpm(_bpm));
         _untoggle();
       }
     });

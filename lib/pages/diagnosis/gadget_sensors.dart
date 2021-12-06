@@ -37,7 +37,6 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
         _startReceiveGadgetData(context);
       } else {
         isWidgetActive = false;
-        diagnosisBloc.add(SetBpm(_bpm));
         eyeTrackingCharacteristic.setNotifyValue(false);
         heartRateCharacteristic.setNotifyValue(false);
       }

@@ -8,11 +8,6 @@ class SetDiagnosisOnProgress extends DiagnosisEvent {
   SetDiagnosisOnProgress(this.diagnosisOnProgress);
 }
 
-class SetBpm extends DiagnosisEvent {
-  final int bpm;
-  SetBpm(this.bpm);
-}
-
 class SetAudioPath extends DiagnosisEvent {
   final String audioPath;
   SetAudioPath(this.audioPath);

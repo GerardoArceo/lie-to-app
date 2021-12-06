@@ -31,7 +31,7 @@ class PreviewPage extends StatelessWidget {
                 stream: appBloc.state.isLoading,
                 builder: (BuildContext context, AsyncSnapshot snapshot){
                   if (snapshot.data == true) {
-                    return BigButton(() => {}, 'assets/img/ai.png', 'Enviando Datos...', animate: true,);
+                    return BigButton(() => {}, 'assets/img/ai.png', 'Calculando diagnóstico...', animate: true,);
                   } else {
                     return Column(
                       children: <Widget>[
@@ -96,12 +96,15 @@ class PreviewPage extends StatelessWidget {
   
   _sendDiagnosis(BuildContext context) async {
     final appBloc = BlocProvider.of<AppBloc>(context);
+    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
     appBloc.add( SetLoadingState(true) );
 
-    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
     try {
       final res = await CloudApiProvider().sendDiagnosis(diagnosisBloc.state.audioPathValue, diagnosisBloc.state.bpmResultsValue ?? [], diagnosisBloc.state.eyeTrackingResultsValue ?? [], mode);
       appBloc.add( SetLoadingState(false) );
+      diagnosisBloc.add(SetBpmResults([]));
+      diagnosisBloc.add(SetEyeTrackingResults([]));
+
       if (mode == 'calibration') {
         Navigator.pushNamed(context, 'diagnosis');
         utils.showNiceDialog(context, 'Lie to app', 'Calibración de gadget realizada correctamente' , () => {}, '');

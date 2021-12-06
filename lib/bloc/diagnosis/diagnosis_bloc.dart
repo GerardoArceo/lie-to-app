@@ -12,8 +12,6 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
 
       if (event is SetDiagnosisOnProgress ) {
         state.diagnosisOnProgress.sink.add(event.diagnosisOnProgress);
-      } else if (event is SetBpm ) {
-        state.bpm.sink.add(event.bpm);
       } else if (event is SetAudioPath ) {
         state.audioPath.sink.add(event.audioPath);
       } else if (event is SetGadget ) {
