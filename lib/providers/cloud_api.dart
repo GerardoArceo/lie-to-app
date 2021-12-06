@@ -2,13 +2,11 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 
 class CloudApiProvider {
 
@@ -25,13 +23,9 @@ class CloudApiProvider {
     final uri = Uri.parse(url + 'diagnosis');
 
     try {
-      print('🐞 POST SAD: $audioPath $bpm $eyeTrackingResults $mode');
       var request = http.MultipartRequest("POST", uri);
 
       File audioFile = File(audioPath);
-      print('SIZE 1: ${audioFile.lengthSync()}');
-      await Future.delayed(Duration(seconds: 1));
-      print('SIZE 2: ${audioFile.lengthSync()}');
       var stream = http.ByteStream(Stream.castFrom((audioFile.openRead())));
       final multipartFile = http.MultipartFile('myFile', stream, audioFile.lengthSync(), filename: basename(audioPath));
       request.files.add(multipartFile);
@@ -50,7 +44,7 @@ class CloudApiProvider {
       
     } catch (e) {
       print('🐞 POST ERROR: $e');
-      return {"ok": false};
+      return null;
     }
   }
 
@@ -70,7 +64,7 @@ class CloudApiProvider {
       return jsonDecode(response.body);
     } catch (e) {
       print(e);
-      return {"ok": false};
+      return null;
     }
   }
 
@@ -89,7 +83,7 @@ class CloudApiProvider {
       return jsonDecode(response.body);
     } catch (e) {
       print(e);
-      return {"ok": false};
+      return null;
     }
   }
 }

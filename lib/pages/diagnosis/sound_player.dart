@@ -31,8 +31,8 @@ import 'package:lie_to_app_2/widgets/rounded_button.dart';
  *
  */
 
-Codec _codec = Codec.pcm16WAV;
-String _mPath = 'tau_file.wav';
+Codec _codec = Codec.mp3;
+String _mPath = 'tau_file.mp4';
 
 ///
 typedef Fn = void Function();

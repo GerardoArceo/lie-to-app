@@ -154,7 +154,6 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
               if (data.isNaN || data == 0) return '';
               return data - 48;
             }).join();
-            print('💩' + v);
             if (_heartRateData.length >= _windowLen2) {
               _heartRateData.removeAt(0);
             }

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lie_to_app_2/bloc/app/app_bloc.dart';
 import 'package:lie_to_app_2/bloc/diagnosis/diagnosis_bloc.dart';
-// import 'package:lie_to_app_2/pages/diagnosis/sound_player.dart';
+import 'package:lie_to_app_2/pages/diagnosis/sound_player.dart';
 import 'package:lie_to_app_2/providers/cloud_api.dart';
 import 'package:lie_to_app_2/utils/utils.dart';
 import 'package:lie_to_app_2/widgets/big_button.dart';
@@ -74,7 +74,7 @@ class PreviewPage extends StatelessWidget {
                   );
                 }
               ),
-              // SimplePlayback()
+              SimplePlayback()
             ],
           ),
           backButton(context),
@@ -121,12 +121,15 @@ class PreviewPage extends StatelessWidget {
       if (mode == 'calibration') {
         Navigator.pushNamed(context, 'diagnosis');
         utils.showNiceDialog(context, 'Lie to app', 'Calibración de gadget realizada correctamente' , () => {}, '');
+      } else if (mode == 'testing') {
+        Navigator.pushNamed(context, 'diagnosis');
+        utils.showNiceDialog(context, 'Lie to app', 'Prueba realizada correctamente' , () => {}, '');
       } else if (mode == 'trainingTruth' || mode == 'trainingLie' || mode == 'testing') {
         Navigator.pushNamed(context, 'diagnosis');
-        if (res != null && res.ok == true) {
-          utils.showNiceDialog(context, 'Lie to app', 'Datos de entrenamiento guardados correctamente' , () => {}, '');
-        } else {
+        if (res == null) {
           utils.showNiceDialog(context, 'Lie to app', 'Error al guardar datos de entrenamiento' , () => {}, '');
+        } else {
+          utils.showNiceDialog(context, 'Lie to app', 'Datos de entrenamiento guardados correctamente' , () => {}, '');
         }
       } else {
         Navigator.pushNamed(context, 'results', arguments: res);
