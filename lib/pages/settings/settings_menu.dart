@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lie_to_app_2/bloc/app/app_bloc.dart';
+import 'package:lie_to_app_2/pages/settings/history_page.dart';
+import 'package:lie_to_app_2/pages/settings/stats_page.dart';
 import 'package:lie_to_app_2/providers/cloud_api.dart';
 import 'package:lie_to_app_2/providers/sign_in.dart';
 import 'package:lie_to_app_2/utils/utils.dart' as utils;
@@ -122,9 +124,12 @@ class SettingsMenu extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
         Function f;
         if (snapshot.hasData) {
-          f = () {
-            final history = CloudApiProvider().sendGetRequest({}, 'get_user_diagnosis');
-          };
+          f = () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HistoryPage(),
+            ),
+          );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return RoundedButton((){},_color, icon: Icons.radio_button_checked, text: 'Cargando...');
         } else if (snapshot.hasError) { 
@@ -145,7 +150,12 @@ class SettingsMenu extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
         Function f;
         if (snapshot.hasData) {
-          f = () => print('HOLA MUNDO');
+          f = () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const StatsPage(),
+            ),
+          );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return RoundedButton((){},_color, icon: Icons.radio_button_checked, text: 'Cargando...');
         } else if (snapshot.hasError) { 

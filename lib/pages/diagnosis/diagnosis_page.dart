@@ -90,31 +90,6 @@ class DiagnosisPage extends StatelessWidget {
     );
   }
 
-  // Widget _body(BuildContext context) {
-  //   const textStyle = TextStyle(fontSize: 20.0, color: Colors.white, fontStyle: FontStyle.italic);
-    
-  //   final appBloc = BlocProvider.of<AppBloc>(context);
-  //   return StreamBuilder(
-  //     stream: appBloc.state.bluetoothConected,
-  //     builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
-  //       String _text;
-  //       if (snapshot.hasData && snapshot.data == true) {
-  //         _text = 'Lentes gadget preparados para el diagnóstico';
-  //       } else {
-  //         _text = 'IMPORTANTE: Los lentes gadget no están conectados por lo que la calidad del diagnóstico será inferior';
-  //       }
-  //       return Container(
-  //         margin: const EdgeInsets.all(20),
-  //         child: Column(
-  //           children: <Widget>[
-  //             Text(_text, style: textStyle, textAlign: TextAlign.justify,),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
   _startDiagnosis(BuildContext context) async {
     final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
     diagnosisBloc.add( SetDiagnosisOnProgress(true) );

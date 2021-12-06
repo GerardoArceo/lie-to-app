@@ -27,7 +27,7 @@ class CloudApiProvider {
 
       File audioFile = File(audioPath);
       var stream = http.ByteStream(Stream.castFrom((audioFile.openRead())));
-      final multipartFile = http.MultipartFile('myFile', stream, audioFile.lengthSync(), filename: basename(audioPath));
+      final multipartFile = http.MultipartFile('audioFile', stream, audioFile.lengthSync(), filename: basename(audioPath));
       request.files.add(multipartFile);
 
       request.fields["mode"] = mode;
@@ -48,7 +48,7 @@ class CloudApiProvider {
     }
   }
 
-  sendPostRequest(Map<String, String>  data, String endpoint) async{
+  Future sendPostRequest(Map<String, String>  data, String endpoint) async{
     final user = FirebaseAuth.instance.currentUser!;
     data['uid'] = user.uid;
 
@@ -68,7 +68,7 @@ class CloudApiProvider {
     }
   }
 
-  sendGetRequest(Map<String, String>  data, String endpoint) async{
+  Future sendGetRequest(Map<String, String>  data, String endpoint) async{
     final user = FirebaseAuth.instance.currentUser!;
     data['uid'] = user.uid;
 

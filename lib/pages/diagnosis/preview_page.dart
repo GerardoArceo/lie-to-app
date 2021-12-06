@@ -96,19 +96,6 @@ class PreviewPage extends StatelessWidget {
       ),
     );
   }
-
-  Future<Uint8List?> makeBuffer() async {
-    Directory tempDir = await getTemporaryDirectory();
-    String path = '${tempDir.path}/sound.aac';
-    try {
-      File file = File(path);
-      file.openRead();
-      var contents = await file.readAsBytes();
-      return contents;
-    } catch (e) {
-      return null;
-    }
-  }
   
   _sendDiagnosis(BuildContext context) async {
     final appBloc = BlocProvider.of<AppBloc>(context);
