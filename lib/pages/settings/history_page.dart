@@ -12,7 +12,7 @@ class HistoryPage extends StatelessWidget {
     return Scaffold(
       body:Stack(
         children: <Widget>[
-          background5(),
+          background6(),
           ListView(
             children: <Widget>[
               _title(),
@@ -35,15 +35,14 @@ class HistoryPage extends StatelessWidget {
             var date = element['created_date'].split('T')[0] + ' a las ' + element['created_date'].split('T')[1].split('.')[0];
             var card = Card(
               child: ListTile(
-                title: Text("${element['hit_probability']}% de probabilidad"),
+                title: Text("${element['hit_probability']}% de probabilidad de diagnóstico correcto"),
                 subtitle: Text("Fecha: $date"),
-                leading: element['final_result'] == 1 ? Text('Verdad') : Text('Mentira'),
-                trailing: element['was_right'] == null ? Icon(Icons.star) : (element['was_right'] == 1 ? Icon(Icons.check_box) : Icon(Icons.error_outline))
+                leading: element['final_result'] == 1 ? Text('Verdad', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(85, 190, 150, 1.0))) : Text('Mentira', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(254, 115, 108, 1.0))),
+                trailing: element['was_right'] == null ? Icon(Icons.adjust_sharp): (element['was_right'] == 1 ? Icon(Icons.check_circle, color: Color.fromRGBO(85, 190, 150, 1.0)) : Icon(Icons.error, color: Color.fromRGBO(254, 115, 108, 1.0)))
               )
             );
             list.add(card);
           });
-          print('🐯 ${snapshot.data}');
           return Column(
             children: list,
           );
@@ -62,7 +61,7 @@ class HistoryPage extends StatelessWidget {
           SizedBox(height: 20.0,),
           Text('Historial', style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
           SizedBox(height: 20.0,),
-          Text('El hombre que no teme a la verdad, no tiene nada que temer de las mentiras', style: TextStyle(color: Colors.white, fontSize: 18.0))
+          Text('Una mentira pone en duda todas las verdades', style: TextStyle(color: Colors.white, fontSize: 18.0))
         ],
       ),
     );

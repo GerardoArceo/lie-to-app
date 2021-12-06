@@ -62,8 +62,18 @@ class _ResultsPageState extends State<ResultsPage> {
         return Container(
           margin: const EdgeInsets.all(20),
           child: Column(
-            children: const <Widget>[
-              Text('Hubo un error en el análisis :(', style: titleStyle, textAlign: TextAlign.center,),
+            children: <Widget>[
+              const Text('Hubo un error en el análisis', style: titleStyle, textAlign: TextAlign.center,),
+              Table(
+                children: [
+                  TableRow(
+                    children: [
+                      RoundedButton(() => Navigator.pushNamed(context, 'main'), Colors.blueAccent, icon: Icons.home, text: 'Regresar al menú'),
+                      RoundedButton(() => Navigator.pushNamed(context, 'diagnosis'), Colors.teal, icon: Icons.restore_page, text: 'Nuevo diagnóstico'),
+                    ]
+                  ),
+                ],
+              )
             ],
           ),
         ); 

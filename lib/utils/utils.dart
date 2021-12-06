@@ -253,6 +253,75 @@ showNiceDialog(BuildContext context, String title, String text, Function callbac
   );
 }
 
+showInfoDialog(BuildContext context) {
+
+  final titleStyle = TextStyle(fontSize: 30.0, color: Colors.white);
+  final textStyle1 = TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white);
+  final textStyle2 = TextStyle(fontSize: 17.0, color: Colors.white);
+  final buttonStyle = TextStyle(fontSize: 15.0, color: Color.fromRGBO(241,125, 160, 1));
+
+  showGeneralDialog(
+    barrierColor: Colors.black.withOpacity(0.5),
+    transitionBuilder: (context, a1, a2, widget) {
+      return Transform.scale(
+        scale: a1.value,
+        child: Opacity(
+          opacity: a1.value,
+          child: AlertDialog(
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0)
+            ),
+            backgroundColor: Color.fromRGBO(241,125, 170, 0.8),
+            title: Row(
+              children: <Widget>[
+                Text('Lie to App', style: titleStyle,),
+              ],
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+                  crossAxisAlignment: CrossAxisAlignment.center, //Center Row contents vertically,
+                  children: const <Widget>[
+                    Image(
+                      image: AssetImage('assets/img/logo_escom.png'),
+                      fit: BoxFit.fitWidth,
+                    ),
+                    SizedBox(width: 30),
+                    Image(
+                      image: AssetImage('assets/img/logo_upiita.png'),
+                      fit: BoxFit.fitWidth,
+                    )
+                  ]
+                ),
+                SizedBox(height: 30),
+                Text('Realizada por:', style: textStyle1,),
+                Text('Lilián Arceo Martínez', style: textStyle2,),
+                Text('Gerardo Arceo Martínez', style: textStyle2,),
+              ]),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                child: Text('OK', style: buttonStyle,),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+    transitionDuration: Duration(milliseconds: 200),
+    barrierDismissible: true,
+    barrierLabel: '',
+    context: context,
+    pageBuilder: (context, animation1, animation2) {
+      return Container();
+    }
+  );
+}
+
 Widget backButton(BuildContext context, {callback}) {
   return InkWell(
     onTap: callback == null ? () => Navigator.pop(context) : () => callback(),

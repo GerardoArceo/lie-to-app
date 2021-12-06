@@ -79,7 +79,7 @@ class CloudApiProvider {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      print('GET RESPONSE: ${jsonDecode(response.body)}');
+      // print('GET RESPONSE: ${jsonDecode(response.body)}');
       return jsonDecode(response.body);
     } catch (e) {
       print(e);

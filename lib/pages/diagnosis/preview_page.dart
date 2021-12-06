@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:lie_to_app_2/pages/diagnosis/sound_player.dart';
 import 'package:lie_to_app_2/providers/cloud_api.dart';
 import 'package:lie_to_app_2/utils/utils.dart';
 import 'package:lie_to_app_2/widgets/big_button.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:lie_to_app_2/utils/utils.dart' as utils;
 
 class PreviewPage extends StatelessWidget {
@@ -45,12 +42,12 @@ class PreviewPage extends StatelessWidget {
                 },
               ),
               StreamBuilder(
-                stream: diagnosisBloc.state.bpm,
-                builder: (BuildContext context, AsyncSnapshot snapshot){
+                stream: diagnosisBloc.state.bpmResults,
+                builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot){
                   return Text(
-                    snapshot.data != null ? snapshot.data.toString() + ' latidos por minuto' : '-',
+                    (snapshot.data != null ? snapshot.data!.length.toString() : '0') + ' muestras de pulso recolectadas',
                     style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                     textAlign: TextAlign.center,
@@ -67,7 +64,7 @@ class PreviewPage extends StatelessWidget {
                   return Text(
                     (snapshot.data != null ? snapshot.data!.length.toString() : '0') + ' muestras oculares recolectadas',
                     style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                     textAlign: TextAlign.center,

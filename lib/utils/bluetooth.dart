@@ -36,6 +36,11 @@ import 'package:flutter_blue/flutter_blue.dart';
   scanDevices(context) async {
     final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
 
+    bool isScanning = await flutterBlue.isScanning.last;
+    if (isScanning) {
+      return;
+    }
+
     flutterBlue.startScan(timeout: const Duration(seconds: 6));
 
     flutterBlue.scanResults.listen((results) async {

@@ -127,7 +127,7 @@ class DiagnosisPage extends StatelessWidget {
             RoundedButton(() {
               mode = 'trainingLie';
               _startDiagnosis(context);
-            }, Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.error_outline_rounded, text: 'Entrenar mentira'),
+            }, Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.error, text: 'Entrenar mentira'),
           ]
         ),
       ],

@@ -12,6 +12,10 @@ class BigButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    final Shader linearGradient = const LinearGradient(
+      colors: [Color.fromRGBO(151, 222, 208, 1), Color.fromRGBO(171, 165, 224, 1), Color.fromRGBO(210, 130, 235, 1)]
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
     return Container(
       margin: const EdgeInsets.all(35.0),
       child: Material(
@@ -46,7 +50,7 @@ class BigButton extends StatelessWidget {
                     ),
                     Text(
                       text,
-                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: 20, foreground: Paint()..shader = linearGradient),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox( height: 5.0 )

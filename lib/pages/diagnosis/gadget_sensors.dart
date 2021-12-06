@@ -61,7 +61,7 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const Text(
-            "Eye Tracking Sensor",
+            "Sensor de movimientos oculares",
             style: TextStyle(fontSize: 18, color: Colors.white),
           ),
           Expanded(
@@ -81,17 +81,16 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
             height: 50.0,
           ),
           const Text(
-            "Estimated BPM",
+            "Sensor de ritmo cardiaco",
             style: TextStyle(fontSize: 18, color: Colors.white),
           ),
-          Text(
-            // (_bpm > 30 && _bpm < 150 ? _bpm.toString() : "--"),
-            _bpm.toString(),
-            style: const TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
-          ),
+          // Text(
+          //   (_bpm > 30 && _bpm < 150 ? _bpm.toString() : "--"),
+          //   style: const TextStyle(
+          //       fontSize: 32,
+          //       fontWeight: FontWeight.bold,
+          //       color: Colors.white),
+          // ),
           Expanded(
             flex: 1,
             child: Container(

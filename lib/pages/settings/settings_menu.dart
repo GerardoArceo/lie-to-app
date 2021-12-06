@@ -171,7 +171,7 @@ class SettingsMenu extends StatelessWidget {
   Widget _infoButton(context) {
     const _color = Color.fromRGBO(255, 100, 87, 1.0);
     return RoundedButton(
-      () => utils.showNiceDialog(context, 'Lie to App', 'www.gerardoarceo.com' , () => {}, 'TQM'), 
+      () => utils.showInfoDialog(context), 
       _color, 
       icon: Icons.perm_device_information, 
       text: 'Información'
@@ -181,7 +181,7 @@ class SettingsMenu extends StatelessWidget {
   Widget _settingsButton(context) {
     const _color = Color.fromRGBO(97, 120, 140, 1.0);
     return RoundedButton(
-      () => utils.showNiceDialog(context, 'Lie to App', 'www.gerardoarceo.com' , () => {}, 'TQM'), 
+      () => utils.showNiceDialog(context, 'Lie to App', 'www.gerardoarceo.com' , () => {}, 'Gracias por existir'), 
       _color,
       icon: Icons.settings_applications, 
       text: 'Configuración'
