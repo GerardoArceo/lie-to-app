@@ -9,17 +9,15 @@ import 'package:lie_to_app_2/providers/cloud_api.dart';
 import 'package:lie_to_app_2/utils/utils.dart';
 import 'package:lie_to_app_2/widgets/big_button.dart';
 import 'package:lie_to_app_2/utils/utils.dart' as utils;
+import 'package:lie_to_app_2/widgets/rounded_button.dart';
 
 class PreviewPage extends StatelessWidget {
   const PreviewPage({Key? key, this.mode}) : super(key: key);
 
-  final dynamic mode;
+  final String? mode;
 
   @override
   Widget build(BuildContext context) {
-    final appBloc = BlocProvider.of<AppBloc>(context);
-    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
-
     return Scaffold(
       body:Stack(
         children: <Widget>[
@@ -27,51 +25,12 @@ class PreviewPage extends StatelessWidget {
           ListView(
             children: <Widget>[
               _title(),
-              StreamBuilder(
-                stream: appBloc.state.isLoading,
-                builder: (BuildContext context, AsyncSnapshot snapshot){
-                  if (snapshot.data == true) {
-                    return BigButton(() => {}, 'assets/img/ai.png', 'Calculando diagnóstico...', animate: true,);
-                  } else {
-                    return Column(
-                      children: <Widget>[
-                        BigButton(() => _sendDiagnosis(context), 'assets/img/ai.png', 'Enviar Lecturas'),
-                      ],
-                    );
-                  }
-                },
-              ),
-              StreamBuilder(
-                stream: diagnosisBloc.state.bpmResults,
-                builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot){
-                  return Text(
-                    (snapshot.data != null ? snapshot.data!.length.toString() : '0') + ' muestras de pulso recolectadas',
-                    style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    textAlign: TextAlign.center,
-                  );
-                }
-              ),
-              const SizedBox(
-                  width: 200.0,
-                  height: 15.0
-              ),
-              StreamBuilder(
-                stream: diagnosisBloc.state.eyeTrackingResults,
-                builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot){
-                  return Text(
-                    (snapshot.data != null ? snapshot.data!.length.toString() : '0') + ' muestras oculares recolectadas',
-                    style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                    textAlign: TextAlign.center,
-                  );
-                }
-              ),
-              const SimplePlayback()
+              _bigButtonWidget(context),
+              _bpmResultsWidget(context),
+              const SizedBox(height: 15.0),
+              _eyeTrackingResultsWidget(context),
+              const SimplePlayback(),
+              _hiddenButtons(context),
             ],
           ),
           backButton(context),
@@ -93,34 +52,119 @@ class PreviewPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _bigButtonWidget(context) {
+    final appBloc = BlocProvider.of<AppBloc>(context);
+
+    return StreamBuilder(
+      stream: appBloc.state.isLoading,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        if (snapshot.data == true) {
+          return BigButton(() => {}, 'assets/img/ai.png', 'Calculando diagnóstico...', animate: true,);
+        } else {
+          return Column(
+            children: <Widget>[
+              BigButton(() => _sendDiagnosis(context), 'assets/img/ai.png', 'Enviar Lecturas'),
+            ],
+          );
+        }
+      },
+    );
+  }
+
+  Widget _bpmResultsWidget(context) {
+    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
+
+    return StreamBuilder(
+      stream: diagnosisBloc.state.bpmResults,
+      builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot){
+        return Text(
+          (snapshot.data != null ? snapshot.data!.length.toString() : '0') + ' muestras de pulso recolectadas',
+          style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+          textAlign: TextAlign.center,
+        );
+      }
+    );
+  }
+
+  Widget _eyeTrackingResultsWidget(context) {
+    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
+
+    return StreamBuilder(
+      stream: diagnosisBloc.state.eyeTrackingResults,
+      builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot){
+        return Text(
+          (snapshot.data != null ? snapshot.data!.length.toString() : '0') + ' muestras oculares recolectadas',
+          style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+          textAlign: TextAlign.center,
+        );
+      }
+    );
+  }
   
-  _sendDiagnosis(BuildContext context) async {
+  _sendDiagnosis(BuildContext context, {bool? fixedAnswer}) async {
     final appBloc = BlocProvider.of<AppBloc>(context);
     final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
     appBloc.add( SetLoadingState(true) );
 
     try {
-      final res = await CloudApiProvider().sendDiagnosis(diagnosisBloc.state.audioPathValue, diagnosisBloc.state.bpmResultsValue ?? [], diagnosisBloc.state.eyeTrackingResultsValue ?? [], mode);
+      final audioPath = diagnosisBloc.state.audioPathValue;
+      final bpmResults = diagnosisBloc.state.bpmResultsValue ?? [];
+      final eyeTrackingResults = diagnosisBloc.state.eyeTrackingResultsValue ?? [];
+      final res = await CloudApiProvider().sendDiagnosis(audioPath, bpmResults, eyeTrackingResults, mode ?? 'diagnosis', fixedAnswer: fixedAnswer);
       appBloc.add( SetLoadingState(false) );
 
-      if (mode == 'calibration') {
-        Navigator.pushNamed(context, 'diagnosis');
-        utils.showNiceDialog(context, 'Lie to app', 'Calibración de gadget realizada correctamente' , () => {}, '');
-      } else if (mode == 'testing') {
-        Navigator.pushNamed(context, 'diagnosis');
-        utils.showNiceDialog(context, 'Lie to app', 'Prueba realizada correctamente' , () => {}, '');
-      } else if (mode == 'trainingTruth' || mode == 'trainingLie' || mode == 'testing') {
-        Navigator.pushNamed(context, 'diagnosis');
-        if (res == null) {
-          utils.showNiceDialog(context, 'Lie to app', 'Error al guardar datos de entrenamiento' , () => {}, '');
-        } else {
-          utils.showNiceDialog(context, 'Lie to app', 'Datos de entrenamiento guardados correctamente' , () => {}, '');
-        }
-      } else {
-        Navigator.pushNamed(context, 'results', arguments: res);
+      switch (mode) {
+        case 'calibration':
+          Navigator.pushNamed(context, 'diagnosis');
+          if (res == null) {
+            utils.showNiceDialog(context, 'Lie to app', 'Error al calibrar el gadget' , () => {}, '');
+          } else {
+            utils.showNiceDialog(context, 'Lie to app', 'Calibración de gadget realizada correctamente' , () => {}, '');
+          }
+          break;
+        case 'testing':
+          Navigator.pushNamed(context, 'diagnosis');
+          utils.showNiceDialog(context, 'Lie to app', 'Prueba realizada correctamente' , () => {}, '');
+          break;
+        case 'trainingTruth':
+        case 'trainingLie':
+          Navigator.pushNamed(context, 'diagnosis');
+          if (res == null) {
+            utils.showNiceDialog(context, 'Lie to app', 'Error al guardar datos de entrenamiento' , () => {}, '');
+          } else {
+            utils.showNiceDialog(context, 'Lie to app', 'Datos de entrenamiento guardados correctamente' , () => {}, '');
+          }
+          break;
+        case 'diagnosis':
+          Navigator.pushNamed(context, 'results', arguments: res);
+          break;
       }
     } catch (e) {
       appBloc.add( SetLoadingState(false) );
     }
+  }
+
+  Widget _hiddenButtons(BuildContext context) {
+    return Table(
+      children: [
+        TableRow(
+          children: [
+            RoundedButton(() {
+              _sendDiagnosis(context, fixedAnswer: true);
+            }, Colors.transparent, invisible: true,),
+            RoundedButton(() {
+              _sendDiagnosis(context, fixedAnswer: false);
+            }, Colors.transparent, invisible: true,),
+          ]
+        )
+      ],
+    );
   }
 }

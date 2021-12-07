@@ -38,7 +38,7 @@ connectGadget(context) async {
   final connectedDevices = await flutterBlue.connectedDevices;
   for (var device in connectedDevices) {
     if (device.name == 'LieToGadget' || device.id.toString() == '7C:9E:BD:ED:7E:5E') {
-      debugPrint('🐨 LIE TO GADGET ALREADY SYNC: ${device.id.toString()} ${device.name}');
+      debugPrint('🐻 LIE TO GADGET ALREADY SYNC: ${device.id.toString()} ${device.name}');
       diagnosisBloc.add( SetGadget(device) );
       return;
     }
@@ -66,13 +66,11 @@ scanDevices(context) async {
     try {
       for (ScanResult r in results) {
         if (r.device.name == 'LieToGadget' || r.device.id.toString() == '7C:9E:BD:ED:7E:5E') {
-          debugPrint('🐨 LIE TO GADGET SYNC: ${r.device.id.toString()} ${r.device.name}');
+          debugPrint('🐻 LIE TO GADGET SYNC: ${r.device.id.toString()} ${r.device.name}');
           diagnosisBloc.add( SetGadget(r.device) );
           await r.device.connect();
           flutterBlue.stopScan();
           return;
-        } else {
-          debugPrint('DEVICE FOUND: ' + r.device.name.toString());
         }
       }
     } catch (e) {

@@ -47,10 +47,6 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
   void dispose() {
     super.dispose();
     isWidgetActive = false;
-    // final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
-    // diagnosisBloc.add(SetBpm(_bpm));
-    // eyeTrackingCharacteristic.setNotifyValue(false);
-    // heartRateCharacteristic.setNotifyValue(false);
   }
 
   @override
@@ -117,13 +113,13 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
     try {
       services = await gadget.discoverServices();
     } catch (e) {
-      debugPrint("Error discovering services: $e");
+      debugPrint("🦊 Error discovering services: $e");
       return;
     }
 
     for (var service in services) {
       for (var c in service.characteristics) {
-        debugPrint('ID CARACTERISTICA 🦊' + c.uuid.toString());
+        debugPrint('🦊 ID CARACTERISTICA: ' + c.uuid.toString());
         if (c.uuid.toString() == 'beb5483e-36e1-4688-b7f5-ea07361b26a8') { // eye tracking
           eyeTrackingCharacteristic = c;
           eyeTrackingCharacteristic.setNotifyValue(true);

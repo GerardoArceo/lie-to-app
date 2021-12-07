@@ -50,11 +50,11 @@ class _ResultsPageState extends State<ResultsPage> {
     );
   }
 
-  Widget _body(BuildContext context, Map result) {
+  Widget _body(BuildContext context, Map? result) {
     const titleStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 60.0, color: Colors.white);
     const textStyle = TextStyle(fontSize: 15.0, color: Colors.white, fontStyle: FontStyle.italic);
     
-    if (result['ok'] == null || result['ok'] == false) return _errorWidget();
+    if (result == null || result['ok'] == null || result['ok'] == false) return _errorWidget();
     
     return Container(
       margin: const EdgeInsets.all(20),
@@ -62,7 +62,7 @@ class _ResultsPageState extends State<ResultsPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget> [
           Text(result['final_result'] ? 'Verdad' : 'Mentira', style: titleStyle, textAlign: TextAlign.center,),
-          Text('Probabilidad de diagnóstico correcto: ' + result['hit_probability'], style: textStyle, textAlign: TextAlign.center,),
+          Text('Probabilidad de diagnóstico correcto: ' + result['hit_probability'].toString() + '%', style: textStyle, textAlign: TextAlign.center,),
           const SizedBox(height: 60,),
           _backButtonsWidget(),
           const SizedBox(height: 20),
@@ -114,13 +114,14 @@ class _ResultsPageState extends State<ResultsPage> {
   }
 
   Widget _errorWidget() {
-    const titleStyle = TextStyle(fontSize: 40.0, color: Colors.white);
+    const titleStyle = TextStyle(fontSize: 30.0, color: Colors.white);
 
     return Container(
       margin: const EdgeInsets.all(20),
       child: Column(
         children: <Widget>[
           const Text('Hubo un error en el análisis', style: titleStyle, textAlign: TextAlign.center,),
+          const SizedBox(height: 60,),
           Table(
             children: [
               TableRow(

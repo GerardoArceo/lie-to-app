@@ -9,8 +9,9 @@ class RoundedButton extends StatelessWidget {
   final String? text;
   final IconData? icon;
   final ImageProvider<Object>? backgroundImage;
+  final bool invisible;
 
-  const RoundedButton(this.callback, this.color, {this.text, this.icon, this.backgroundImage, Key? key}) : super(key: key);
+  const RoundedButton(this.callback, this.color, {this.text, this.icon, this.backgroundImage, this.invisible = false, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,9 @@ class RoundedButton extends StatelessWidget {
         child: InkWell(
           onTap: callback,
           borderRadius: BorderRadius.circular(20.0),
+          splashColor: invisible ? Colors.transparent : null,
+          highlightColor: invisible ? Colors.transparent : null,
+          
           child: ClipRRect( 
             borderRadius: BorderRadius.circular(20.0),
             child: BackdropFilter(
@@ -28,7 +32,7 @@ class RoundedButton extends StatelessWidget {
               child: Container(
                 height: 180.0,
                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(62, 66, 107, 0.7),
+                  color: invisible ? Colors.transparent : const Color.fromRGBO(62, 66, 107, 0.7),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Column(

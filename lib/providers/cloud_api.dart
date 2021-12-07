@@ -13,7 +13,7 @@ class CloudApiProvider {
   // final url ='https://liberatosoftware.com/lie-to-api/';
   final url ='http://192.168.3.5:3003/';
 
-  sendDiagnosis(String? audioPath, List<int> bpm, List<int> eyeTrackingResults, String mode) async{
+  sendDiagnosis(String? audioPath, List<int> bpmResults, List<int> eyeTrackingResults, String mode, {bool? fixedAnswer}) async{
     if (audioPath == null) {
       return null;
     }
@@ -31,8 +31,11 @@ class CloudApiProvider {
 
       request.fields["mode"] = mode;
       request.fields["uid"] = user.uid;
-      request.fields["heartData"] = bpm.toString();
+      request.fields["bpmData"] = bpmResults.toString();
       request.fields["eyeTrackingData"] = eyeTrackingResults.toString();
+      if (fixedAnswer != null) {
+        request.fields["fixedAnswer"] = fixedAnswer.toString();
+      }
 
       var response = await request.send();
       String reply = await response.stream.bytesToString();
@@ -59,7 +62,7 @@ class CloudApiProvider {
         },
         body: jsonEncode(data),
       );
-      debugPrint('POST RESPONSE: ${jsonDecode(response.body)}');
+      debugPrint('🐞 POST RESPONSE: ${jsonDecode(response.body)}');
       return jsonDecode(response.body);
     } catch (e) {
       debugPrint('🐞 POST ERROR: $e');
@@ -78,7 +81,7 @@ class CloudApiProvider {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      debugPrint('GET RESPONSE: ${jsonDecode(response.body)}');
+      debugPrint('🐞 GET RESPONSE: ${jsonDecode(response.body)}');
       return jsonDecode(response.body);
     } catch (e) {
       debugPrint('🐞 GET ERROR: $e');
