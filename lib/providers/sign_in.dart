@@ -34,7 +34,7 @@ class GoogleSignInProvider extends ChangeNotifier {
       await CloudApiProvider().sendPostRequest(data, 'saveUser');
       
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return null;
     }
 
@@ -43,11 +43,10 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   void signOutGoogle() async {
     try {
-      // await _googleSignIn.disconnect();
       FirebaseAuth.instance.signOut();
       _googleSignIn.signOut();
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return null;
     }
 

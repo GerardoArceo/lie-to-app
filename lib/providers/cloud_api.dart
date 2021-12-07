@@ -1,9 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
@@ -38,12 +37,12 @@ class CloudApiProvider {
       var response = await request.send();
       String reply = await response.stream.bytesToString();
       final decodeData = json.decode(reply);
-      print('🐞 POST RESPONSE: $decodeData');
+      debugPrint('🐞 POST DIAGNOSIS RESPONSE: $decodeData');
 
       return decodeData;
       
     } catch (e) {
-      print('🐞 POST ERROR: $e');
+      debugPrint('🐞 POST DIAGNOSIS ERROR: $e');
       return null;
     }
   }
@@ -60,10 +59,10 @@ class CloudApiProvider {
         },
         body: jsonEncode(data),
       );
-      print('POST RESPONSE: ${jsonDecode(response.body)}');
+      debugPrint('POST RESPONSE: ${jsonDecode(response.body)}');
       return jsonDecode(response.body);
     } catch (e) {
-      print(e);
+      debugPrint('🐞 POST ERROR: $e');
       return null;
     }
   }
@@ -79,10 +78,10 @@ class CloudApiProvider {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      // print('GET RESPONSE: ${jsonDecode(response.body)}');
+      debugPrint('GET RESPONSE: ${jsonDecode(response.body)}');
       return jsonDecode(response.body);
     } catch (e) {
-      print(e);
+      debugPrint('🐞 GET ERROR: $e');
       return null;
     }
   }
