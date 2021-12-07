@@ -10,6 +10,8 @@ listenChanges(context) {
   final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
   final appBloc = BlocProvider.of<AppBloc>(context);
 
+  diagnosisBloc.add(SetDiagnosisOnProgress(false));
+
   diagnosisBloc.state.gadget.stream.listen((gadget) {
     gadget.state.listen((state) async {
       if (state == BluetoothDeviceState.connected) {

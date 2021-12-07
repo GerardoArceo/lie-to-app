@@ -32,13 +32,13 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
     super.initState();
 
     final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
-    diagnosisBloc.state.diagnosisOnProgress.stream.listen((diagnosisOnProgress) {
+    diagnosisBloc.state.diagnosisOnProgress.stream.listen((diagnosisOnProgress) async {
       if (diagnosisOnProgress) {
         _startReceiveGadgetData(context);
       } else {
         isWidgetActive = false;
-        eyeTrackingCharacteristic.setNotifyValue(false);
-        heartRateCharacteristic.setNotifyValue(false);
+        await eyeTrackingCharacteristic.setNotifyValue(false);
+        await heartRateCharacteristic.setNotifyValue(false);
       }
     });
   }
@@ -122,7 +122,7 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
         debugPrint('🦊 ID CARACTERISTICA: ' + c.uuid.toString());
         if (c.uuid.toString() == 'beb5483e-36e1-4688-b7f5-ea07361b26a8') { // eye tracking
           eyeTrackingCharacteristic = c;
-          eyeTrackingCharacteristic.setNotifyValue(true);
+          await eyeTrackingCharacteristic.setNotifyValue(true);
           eyeTrackingCharacteristic.value.listen((value) {
             final v = value.map((data) {
               if (data.isNaN || data == 0) return '';
@@ -133,15 +133,19 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
             }
             if (isWidgetActive) {
               setState(() {
-                _eyeTrackingData.add(SensorValue(DateTime.now(), 255 - double.parse(v)));
+                if (v.isNotEmpty) {
+                  _eyeTrackingData.add(SensorValue(DateTime.now(), 255 - double.parse(v)));
+                }
               });
             }
-            eyeTrackingResults.add(int.parse(v));
+            if (v.isNotEmpty) {
+              eyeTrackingResults.add(int.parse(v));
+            }
           });
         }
         if (c.uuid.toString() == '7a807eb0-5583-11ec-bf63-0242ac130002') { // heart rate
           heartRateCharacteristic = c;
-          heartRateCharacteristic.setNotifyValue(true);
+          await heartRateCharacteristic.setNotifyValue(true);
           _updateBPM();
           heartRateCharacteristic.value.listen((value) {
             final v = value.map((data) {
@@ -153,10 +157,14 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
             }
             if (isWidgetActive) {
               setState(() {
-                _heartRateData.add(SensorValue(DateTime.now(), 255 - double.parse(v)));
+                if (v.isNotEmpty) {
+                  _heartRateData.add(SensorValue(DateTime.now(), 255 - double.parse(v)));
+                }
               });
             }
-            bpmResults.add(int.parse(v));
+            if (v.isNotEmpty) {
+              bpmResults.add(int.parse(v));
+            }
           });
         }
        

@@ -33,9 +33,7 @@ class CloudApiProvider {
       request.fields["uid"] = user.uid;
       request.fields["bpmData"] = bpmResults.toString();
       request.fields["eyeTrackingData"] = eyeTrackingResults.toString();
-      if (fixedAnswer != null) {
-        request.fields["fixedAnswer"] = fixedAnswer.toString();
-      }
+      if (fixedAnswer != null) request.fields["fixedAnswer"] = fixedAnswer.toString();
 
       var response = await request.send();
       String reply = await response.stream.bytesToString();

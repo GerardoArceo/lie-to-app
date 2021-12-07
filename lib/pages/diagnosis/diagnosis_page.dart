@@ -41,6 +41,7 @@ class DiagnosisPage extends StatelessWidget {
                       )
                     }, 'assets/img/ai.png', 'Finalizar', animate: true,);
                   } else {
+                    mode = 'diagnosis';
                     return Column(
                       children: <Widget>[
                         BigButton(() => _startDiagnosis(context), 'assets/img/ai.png', 'Empezar'),
@@ -123,11 +124,11 @@ class DiagnosisPage extends StatelessWidget {
             RoundedButton(() {
               mode = 'trainingTruth';
               _startDiagnosis(context);
-            }, const Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.check_circle, text: 'Entrenar verdad'),
+            }, const Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.mood, text: 'Entrenar verdad'),
             RoundedButton(() {
               mode = 'trainingLie';
               _startDiagnosis(context);
-            }, const Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.error, text: 'Entrenar mentira'),
+            }, const Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.mood_bad, text: 'Entrenar mentira'),
           ]
         ),
       ],

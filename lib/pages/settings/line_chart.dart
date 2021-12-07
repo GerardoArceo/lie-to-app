@@ -16,7 +16,6 @@ class _LineChartState extends State<LineChart1> {
     const Color(0xff02d39a),
   ];
 
-
   bool showAvg = false;
 
   @override
@@ -67,7 +66,9 @@ class _LineChartState extends State<LineChart1> {
     double temp = 0;
     widget.data.forEach((element) {
       // var parsedDate = DateTime.parse(element['created_date']);
-      _spots.add(FlSpot(temp, element['hit_probability']* 1.0));
+      if (element['hit_probability'] != null) {
+        _spots.add(FlSpot(temp, element['hit_probability']* 1.0));
+      }
       temp += interval;
     });
 

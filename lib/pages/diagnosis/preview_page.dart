@@ -35,6 +35,7 @@ class PreviewPage extends StatelessWidget {
           ),
           backButton(context),
         ],
+        
       ),
     );
   }

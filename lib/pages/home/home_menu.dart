@@ -58,8 +58,8 @@ class HomeMenu extends StatelessWidget {
       children: [
         TableRow(
           children: [
-            RoundedButton(() => Navigator.pushReplacementNamed(context, 'info'), Colors.blue, icon: Icons.info_outline, text: '¿Lie to App?'),
-            RoundedButton(() => Navigator.pushReplacementNamed(context, 'tutorial'), const Color.fromRGBO(236, 98, 188, 1.0), icon: Icons.live_help, text: 'Tutorial'),
+            RoundedButton(() => Navigator.pushReplacementNamed(context, 'info'), Colors.blueAccent, icon: Icons.info_outline, text: '¿Lie to App?'),
+            RoundedButton(() => Navigator.pushReplacementNamed(context, 'tutorial'), const Color.fromRGBO(241, 142, 172, 1.0), icon: Icons.live_help, text: 'Tutorial'),
           ]
         ),
       ],

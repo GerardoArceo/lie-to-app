@@ -78,7 +78,7 @@ class _ResultsPageState extends State<ResultsPage> {
         TableRow(
           children: [
             RoundedButton(() => Navigator.pushNamed(context, 'main'), Colors.blueAccent, icon: Icons.home, text: 'Regresar al menú'),
-            RoundedButton(() => Navigator.pushNamed(context, 'diagnosis'), Colors.teal, icon: Icons.restore_page, text: 'Nuevo diagnóstico'),
+            RoundedButton(() => Navigator.pushNamed(context, 'diagnosis'), const Color.fromRGBO(194, 126, 158, 1.0), icon: Icons.restore_page, text: 'Nuevo diagnóstico'),
           ]
         ),
       ],
@@ -101,8 +101,8 @@ class _ResultsPageState extends State<ResultsPage> {
               children: [
                 TableRow(
                   children: [
-                    RoundedButton(() => _sendRetroalimentation(context, false), Colors.redAccent, icon: Icons.mood_bad, text: 'Falló'),
-                    RoundedButton(() => _sendRetroalimentation(context, true), Colors.green, icon: Icons.mood, text: 'Acertó'),
+                    RoundedButton(() => _sendRetroalimentation(context, true), const Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.check_circle, text: 'Acertó'),
+                    RoundedButton(() => _sendRetroalimentation(context, false), const Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.error, text: 'Falló'),
                   ]
                 ),
               ],

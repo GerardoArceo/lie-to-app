@@ -4,10 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_sound_platform_interface/flutter_sound_recorder_platform_interface.dart';
 import 'package:lie_to_app_2/bloc/diagnosis/diagnosis_bloc.dart';
+import 'package:lie_to_app_2/constants/app_colors.dart';
+import 'package:lie_to_app_2/constants/recorder_constants.dart';
+import 'package:lie_to_app_2/widgets/audio_visualizer.dart';
 
 typedef _Fn = void Function();
 
 const theSource = AudioSource.microphone;
+String _recorderTxt = '00:00:00';
 
 /// Example app.
 class SimpleRecorder extends StatefulWidget {
@@ -57,9 +61,17 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       toFile: _mPath,
       codec: _codec,
       audioSource: theSource,
-    )
-        .then((value) {
-      setState(() {});
+    ).then((value) {
+
+      _mRecorder!.onProgress!.listen((e) {
+        debugPrint('🔫' + e.decibels.toString());
+        DateTime date = DateTime.fromMillisecondsSinceEpoch(e.duration.inMilliseconds, isUtc: true);
+
+        setState(() {
+          _recorderTxt = date.toString();
+        });
+      });
+
     });
   }
 
@@ -99,5 +111,28 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
     });
 
     return Container();
+    // return Row(
+    //   children: [
+    //     Spacer(),
+    //     StreamBuilder<dynamic>(
+    //         initialData: RecorderConstants.decibleLimit,
+    //         stream: _mRecorder?.onProgress,
+    //         builder: (context, snapshot) {
+    //           if (snapshot.hasData) {
+    //             print('🧨' + snapshot.data.toString());
+    //             return AudioVisualizer(amplitude: double.parse(snapshot.data.toString()));
+    //           }
+    //           if (snapshot.hasError) {
+    //             return Text(
+    //               'Visualizer failed to load',
+    //               style: TextStyle(color: AppColors.accentColor),
+    //             );
+    //           } else {
+    //             return SizedBox();
+    //           }
+    //         }),
+    //     Spacer(),
+    //   ],
+    // );
   }
 }
