@@ -18,12 +18,10 @@ class SetGadget extends DiagnosisEvent {
   SetGadget(this.gadget);
 }
 
-class SetEyeTrackingResults extends DiagnosisEvent {
-  final List<int> eyeTrackingResults;
-  SetEyeTrackingResults(this.eyeTrackingResults);
+class ResetEyeTrackingResults extends DiagnosisEvent {
+  ResetEyeTrackingResults();
 }
 
-class SetBpmResults extends DiagnosisEvent {
-  final List<int> bpmResults;
-  SetBpmResults(this.bpmResults);
+class ResetBpmResults extends DiagnosisEvent {
+  ResetBpmResults();
 }

@@ -18,7 +18,7 @@ class HomeMenu extends StatelessWidget {
 
     return Stack(
       children: <Widget>[
-        background1(),
+        background(0),
         ListView(
           children: <Widget>[
             _title(),

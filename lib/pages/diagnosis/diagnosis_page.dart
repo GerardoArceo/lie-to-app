@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lie_to_app_2/bloc/app/app_bloc.dart';
 import 'package:lie_to_app_2/bloc/diagnosis/diagnosis_bloc.dart';
 import 'package:lie_to_app_2/pages/diagnosis/gadget_sensors.dart';
 import 'package:lie_to_app_2/pages/diagnosis/preview_page.dart';
@@ -11,9 +10,10 @@ import 'package:lie_to_app_2/utils/utils.dart';
 import 'package:lie_to_app_2/widgets/big_button.dart';
 import 'package:lie_to_app_2/widgets/rounded_button.dart';
 
+String mode = 'diagnosis';
+
 class DiagnosisPage extends StatelessWidget {
-  DiagnosisPage({Key? key}) : super(key: key);
-  String mode = 'diagnosis';
+  const DiagnosisPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DiagnosisPage extends StatelessWidget {
     return Scaffold(
       body:Stack(
         children: <Widget>[
-          background4(),
+          background(3, opacity: 0.6),
           const SimpleRecorder(),
           ListView(
             children: <Widget>[
@@ -92,6 +92,8 @@ class DiagnosisPage extends StatelessWidget {
 
   _startDiagnosis(BuildContext context) async {
     final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
+    diagnosisBloc.add(ResetBpmResults());
+    diagnosisBloc.add(ResetEyeTrackingResults());
     diagnosisBloc.add( SetDiagnosisOnProgress(true) );
   }
 
@@ -102,8 +104,6 @@ class DiagnosisPage extends StatelessWidget {
 
 
   Widget _calibrationButton(BuildContext context) {
-    final appBloc = BlocProvider.of<AppBloc>(context);
-
     return Table(
       children: [
         TableRow(
@@ -111,11 +111,11 @@ class DiagnosisPage extends StatelessWidget {
             RoundedButton(() {
                mode = 'calibration';
               _startDiagnosis(context);
-            }, Color.fromRGBO(97, 120, 140, 1.0), icon: Icons.settings_applications, text: 'Calibrar gadget'),
+            }, const Color.fromRGBO(97, 120, 140, 1.0), icon: Icons.settings_applications, text: 'Calibrar gadget'),
             RoundedButton(() {
                mode = 'testing';
               _startDiagnosis(context);
-            }, Color.fromRGBO(194, 126, 158, 1.0), icon: Icons.app_registration_sharp, text: 'Modo de prueba'),
+            }, const Color.fromRGBO(194, 126, 158, 1.0), icon: Icons.app_registration_sharp, text: 'Modo de prueba'),
           ]
         ),
         TableRow(
@@ -123,11 +123,11 @@ class DiagnosisPage extends StatelessWidget {
             RoundedButton(() {
               mode = 'trainingTruth';
               _startDiagnosis(context);
-            }, Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.check_circle, text: 'Entrenar verdad'),
+            }, const Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.check_circle, text: 'Entrenar verdad'),
             RoundedButton(() {
               mode = 'trainingLie';
               _startDiagnosis(context);
-            }, Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.error, text: 'Entrenar mentira'),
+            }, const Color.fromRGBO(254, 115, 108, 1.0), icon: Icons.error, text: 'Entrenar mentira'),
           ]
         ),
       ],

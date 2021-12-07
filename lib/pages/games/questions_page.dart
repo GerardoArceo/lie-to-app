@@ -12,7 +12,7 @@ class QuestionsPage extends StatelessWidget {
     return Scaffold(
       body:Stack(
         children: <Widget>[
-          background6(),
+          background(1, opacity: 0.7),
           ListView(
             children: <Widget>[
               _title(),
@@ -89,12 +89,12 @@ class QuestionsPage extends StatelessWidget {
         break;
     }
     List<Widget> list = [];
-    questions.forEach((question) {
-      Icon icon = Icon(Icons.star, color: Color.fromRGBO(85, 190, 150, 1.0));
+    for (var question in questions) {
+      Icon icon = const Icon(Icons.star, color: Color.fromRGBO(85, 190, 150, 1.0));
       if(question["difficulty"] == 2) {
-        icon = Icon(Icons.star, color: Color.fromRGBO(247, 140, 50, 1.0));
+        icon = const Icon(Icons.star, color: Color.fromRGBO(247, 140, 50, 1.0));
       } else if(question["difficulty"] == 3) {
-        icon = Icon(Icons.star, color: Color.fromRGBO(242, 61, 40, 1.0));
+        icon = const Icon(Icons.star, color: Color.fromRGBO(242, 61, 40, 1.0));
       }
 
       var card = Card(
@@ -104,7 +104,7 @@ class QuestionsPage extends StatelessWidget {
         )
       );
       list.add(card);
-    });
+    }
     return Column(
       children: list,
     );
@@ -133,13 +133,12 @@ class QuestionsPage extends StatelessWidget {
         break;
     }
 
-    String asd = "";
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const SizedBox(height: 20.0,),
-          Text(title, style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
+          Text(title, style: const TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),),
           const SizedBox(height: 20.0,),
           const Text('El tiempo descubre la verdad', style: TextStyle(color: Colors.white, fontSize: 18.0))
         ],

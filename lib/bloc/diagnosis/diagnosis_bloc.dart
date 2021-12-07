@@ -16,10 +16,10 @@ class DiagnosisBloc extends Bloc<DiagnosisEvent, DiagnosisState> {
         state.audioPath.sink.add(event.audioPath);
       } else if (event is SetGadget ) {
         state.gadget.sink.add(event.gadget);
-      } else if (event is SetEyeTrackingResults ) {
-        state.eyeTrackingResults.sink.add(event.eyeTrackingResults);
-      } else if (event is SetBpmResults ) {
-        state.bpmResults.sink.add(event.bpmResults);
+      } else if (event is ResetEyeTrackingResults ) {
+        state.eyeTrackingResults.sink.add([]);
+      } else if (event is ResetBpmResults ) {
+        state.bpmResults.sink.add([]);
       } 
 
     });

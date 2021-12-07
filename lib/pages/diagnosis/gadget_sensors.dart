@@ -117,13 +117,13 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
     try {
       services = await gadget.discoverServices();
     } catch (e) {
-      print(e);
+      debugPrint("Error discovering services: $e");
       return;
     }
 
     for (var service in services) {
       for (var c in service.characteristics) {
-        print('ID CARACTERISTICA 🦊' + c.uuid.toString());
+        debugPrint('ID CARACTERISTICA 🦊' + c.uuid.toString());
         if (c.uuid.toString() == 'beb5483e-36e1-4688-b7f5-ea07361b26a8') { // eye tracking
           eyeTrackingCharacteristic = c;
           eyeTrackingCharacteristic.setNotifyValue(true);
@@ -191,10 +191,10 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
       _avg = 0;
       _n = _values.length;
       _m = 0;
-      _values.forEach((SensorValue value) {
+      for (var value in _values) {
         _avg += value.value / _n;
         if (value.value > _m) _m = value.value;
-      });
+      }
       _threshold = (_m + _avg) / 2;
       _bpm = 0;
       _counter = 0;
@@ -213,7 +213,6 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
       }
       if (_counter > 0) {
         _bpm = _bpm / _counter;
-        print(_bpm);
         if (isWidgetActive) {
           setState(() {
             this._bpm = ((1 - _alpha) * this._bpm + _alpha * _bpm).toInt();

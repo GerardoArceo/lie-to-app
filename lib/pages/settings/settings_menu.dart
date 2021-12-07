@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lie_to_app_2/bloc/app/app_bloc.dart';
 import 'package:lie_to_app_2/pages/settings/history_page.dart';
 import 'package:lie_to_app_2/pages/settings/stats_page.dart';
-import 'package:lie_to_app_2/providers/cloud_api.dart';
 import 'package:lie_to_app_2/providers/sign_in.dart';
 import 'package:lie_to_app_2/utils/utils.dart' as utils;
 import 'package:lie_to_app_2/utils/bluetooth.dart' as bluetooth;
@@ -21,7 +20,7 @@ class SettingsMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        background3(),
+        background(2),
         ListView(
           children: <Widget>[
             _title(),
@@ -144,7 +143,6 @@ class SettingsMenu extends StatelessWidget {
 
   Widget _statsButton(BuildContext context) {
     const _color = Color.fromRGBO(124, 188, 153, 1.0);
-    final appBloc = BlocProvider.of<AppBloc>(context);
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){

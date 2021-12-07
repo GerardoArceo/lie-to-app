@@ -10,8 +10,8 @@ import 'home/home_menu.dart';
 
 final _menus = [
   const HomeMenu(),
-  GamesMenu(),
-  SettingsMenu()
+  const GamesMenu(),
+  const SettingsMenu()
 ];
 
 class MainPage extends StatefulWidget {

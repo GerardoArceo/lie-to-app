@@ -23,7 +23,7 @@ class PreviewPage extends StatelessWidget {
     return Scaffold(
       body:Stack(
         children: <Widget>[
-          background5(),
+          background(3, opacity: 0.8),
           ListView(
             children: <Widget>[
               _title(),
@@ -71,7 +71,7 @@ class PreviewPage extends StatelessWidget {
                   );
                 }
               ),
-              SimplePlayback()
+              const SimplePlayback()
             ],
           ),
           backButton(context),
@@ -102,8 +102,6 @@ class PreviewPage extends StatelessWidget {
     try {
       final res = await CloudApiProvider().sendDiagnosis(diagnosisBloc.state.audioPathValue, diagnosisBloc.state.bpmResultsValue ?? [], diagnosisBloc.state.eyeTrackingResultsValue ?? [], mode);
       appBloc.add( SetLoadingState(false) );
-      diagnosisBloc.add(SetBpmResults([]));
-      diagnosisBloc.add(SetEyeTrackingResults([]));
 
       if (mode == 'calibration') {
         Navigator.pushNamed(context, 'diagnosis');

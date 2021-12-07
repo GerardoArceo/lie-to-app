@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class PieChart1 extends StatefulWidget {
   final dynamic data;
 
-  PieChart1({Key? key, this.data}) : super(key: key);
+  const PieChart1({Key? key, this.data}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => PieChartState();

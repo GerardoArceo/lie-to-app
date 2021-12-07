@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SensorChart extends StatelessWidget {
   final List<SensorValue> _data;
 
-  const SensorChart(this._data);
+  const SensorChart(this._data, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

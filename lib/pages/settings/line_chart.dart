@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class LineChart1 extends StatefulWidget {
   final dynamic data;
 
-  LineChart1({Key? key, this.data}) : super(key: key);
+  const LineChart1({Key? key, this.data}) : super(key: key);
 
   @override
   _LineChartState createState() => _LineChartState();

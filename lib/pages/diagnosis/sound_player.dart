@@ -1,44 +1,17 @@
-/*
- * Copyright 2018, 2019, 2020, 2021 Dooboolab.
- *
- * This file is part of Flutter-Sound.
- *
- * Flutter-Sound is free software: you can redistribute it and/or modify
- * it under the terms of the Mozilla Public License version 2 (MPL2.0),
- * as published by the Mozilla organization.
- *
- * Flutter-Sound is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * MPL General Public License for more details.
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/.
- */
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:lie_to_app_2/widgets/rounded_button.dart';
 
-/*
- *
- * This is a very simple example for Flutter Sound beginners,
- * that show how to record, and then playback a file.
- *
- * This example is really basic.
- *
- */
-
 Codec _codec = Codec.mp3;
 String _mPath = 'tau_file.mp4';
 
-///
 typedef Fn = void Function();
 
 /// Example app.
 class SimplePlayback extends StatefulWidget {
+  const SimplePlayback({Key? key}) : super(key: key);
+
   @override
   _SimplePlaybackState createState() => _SimplePlaybackState();
 }

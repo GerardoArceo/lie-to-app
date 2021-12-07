@@ -183,7 +183,6 @@ class TutorialPage extends StatelessWidget {
   }
 
   Widget _arrow() {
-    const textStyle = TextStyle(fontSize: 15.0, color: Colors.white );
     return Column(
       children: <Widget>[
         Pulse(

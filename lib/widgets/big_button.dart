@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 
 class BigButton extends StatelessWidget {
 
-  final callback, image, text, animate;
-  BigButton(this.callback, this.image, this.text, {this.animate = false});
+  final dynamic callback;
+  final String image;
+  final String text;
+  final bool animate;
+  const BigButton(this.callback, this.image, this.text, {this.animate = false, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class BigButton extends StatelessWidget {
 
     final Shader linearGradient = const LinearGradient(
       colors: [Color.fromRGBO(151, 222, 208, 1), Color.fromRGBO(171, 165, 224, 1), Color.fromRGBO(210, 130, 235, 1)]
-    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+    ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
     return Container(
       margin: const EdgeInsets.all(35.0),

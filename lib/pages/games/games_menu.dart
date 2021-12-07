@@ -6,12 +6,13 @@ import 'package:lie_to_app_2/utils/utils.dart';
 import 'package:lie_to_app_2/widgets/rounded_button.dart';
 
 class GamesMenu extends StatelessWidget {
+  const GamesMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        background2(),
+        background(1),
         ListView(
           children: <Widget>[
             _title(),
@@ -25,7 +26,7 @@ class GamesMenu extends StatelessWidget {
   Widget _title() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const <Widget>[
@@ -45,11 +46,11 @@ class GamesMenu extends StatelessWidget {
           children: [
             RoundedButton(
               () => Navigator.push(context, MaterialPageRoute(builder: (context) => const QuestionsPage(mode: 1))), 
-              Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.question_answer, text: 'Verdad o reto'
+              const Color.fromRGBO(85, 190, 150, 1.0), icon: Icons.question_answer, text: 'Verdad o reto'
             ),
             RoundedButton(
               () => Navigator.push(context, MaterialPageRoute(builder: (context) => const QuestionsPage(mode: 2))), 
-              Color.fromRGBO(96, 102, 199, 1.0), icon: Icons.fingerprint, text: 'Crímenes'
+              const Color.fromRGBO(96, 102, 199, 1.0), icon: Icons.fingerprint, text: 'Crímenes'
             ),
           ]
         ),
@@ -57,11 +58,11 @@ class GamesMenu extends StatelessWidget {
           children: [
             RoundedButton(
               () => Navigator.push(context, MaterialPageRoute(builder: (context) => const QuestionsPage(mode: 3))), 
-              Color.fromRGBO(255, 143, 0, 1.0), icon: Icons.account_box, text: 'Preguntas en familia'
+              const Color.fromRGBO(255, 143, 0, 1.0), icon: Icons.account_box, text: 'Preguntas en familia'
             ),
             RoundedButton(
               () => Navigator.push(context, MaterialPageRoute(builder: (context) => const QuestionsPage(mode: 4))), 
-              Color.fromRGBO(245, 5, 78, 1.0), icon: Icons.favorite, text: 'Preguntas en pareja'
+              const Color.fromRGBO(245, 5, 78, 1.0), icon: Icons.favorite, text: 'Preguntas en pareja'
             ),
           ]
         ),
@@ -69,11 +70,11 @@ class GamesMenu extends StatelessWidget {
           children: [
             RoundedButton(
               () => Navigator.push(context, MaterialPageRoute(builder: (context) => const QuestionsPage(mode: 5))), 
-              Color.fromRGBO(240, 128, 128, 1.0), icon: Icons.people, text: 'Preguntas generales'
+              const Color.fromRGBO(240, 128, 128, 1.0), icon: Icons.people, text: 'Preguntas generales'
             ),
             RoundedButton(
               () => Navigator.push(context, MaterialPageRoute(builder: (context) => const QuestionsPage(mode: 6))), 
-              Color.fromRGBO(247, 149, 195, 1.0), icon: Icons.local_play, text: 'Preguntas filosóficas'
+              const Color.fromRGBO(247, 149, 195, 1.0), icon: Icons.local_play, text: 'Preguntas filosóficas'
             ),
           ]
         ),

@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:lie_to_app_2/bloc/diagnosis/diagnosis_bloc.dart';
 import 'package:lie_to_app_2/pages/diagnosis/diagnosis_page.dart';
 import 'package:lie_to_app_2/pages/diagnosis/preview_page.dart';
@@ -43,27 +42,14 @@ class MyApp extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
-    final appBloc = BlocProvider.of<AppBloc>(context);
     bluetooth.connectGadget(context);
-
-    diagnosisBloc.state.gadget.stream.listen((gadget) {
-      gadget.state.listen((state) async {
-        if (state == BluetoothDeviceState.connected) {
-          print('🐻 LIE TO GADGET CONNECTED: ' + gadget.id.toString());
-          appBloc.add( SetBluetoothState(true) );
-        } else {
-          print('🐻 LIE TO GADGET DISCONNECTED: ' + gadget.id.toString());
-          appBloc.add( SetBluetoothState(false) );
-        }
-      });
-    });
+    bluetooth.listenChanges(context);
 
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(), 
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Lie to App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ), 
@@ -72,7 +58,7 @@ class MyApp extends StatelessWidget {
             'main': (BuildContext context) => const MainPage(),
             'info': (BuildContext context) => const InfoPage(),
             'tutorial': (BuildContext context) => const TutorialPage(),
-            'diagnosis': (BuildContext context) => DiagnosisPage(),
+            'diagnosis': (BuildContext context) => const DiagnosisPage(),
             'preview': (BuildContext context) => const PreviewPage(),
             'results': (BuildContext context) => const ResultsPage(),
             'settings': (BuildContext context) => const SettingsMenu(),

@@ -14,7 +14,7 @@ class StatsPage extends StatelessWidget {
     return Scaffold(
       body:Stack(
         children: <Widget>[
-          background6(),
+          background(2, opacity: 0.6),
           Column(
             children: <Widget>[
               _title(),
@@ -33,10 +33,10 @@ class StatsPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           return Column(children: [
-            Text('Probabilidad de acierto en los diagnósticos', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18.0)),
+            const Text('Probabilidad de acierto en los diagnósticos', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18.0)),
             LineChart1(data: snapshot.data),
-            SizedBox(height: 20.0,),
-            Text('Porcentaje de diagnósticos correctos', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18.0)),
+            const SizedBox(height: 20.0,),
+            const Text('Porcentaje de diagnósticos correctos', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18.0)),
             PieChart1(data: snapshot.data),
           ]);
         } else {
