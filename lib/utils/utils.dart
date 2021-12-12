@@ -39,6 +39,27 @@ Widget _gradient() {
   );
 }
 
+Widget gradientText(String text, double fontSize) {
+  const LinearGradient gradient = LinearGradient(
+    colors: [Color.fromRGBO(151, 222, 208, 1), Color.fromRGBO(171, 165, 224, 1), Color.fromRGBO(210, 130, 235, 1)]
+  );
+
+  return ShaderMask(
+    shaderCallback: (Rect bounds) {
+      return gradient.createShader(Offset.zero & bounds.size);
+    },
+    child: Center(
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: fontSize,
+        ),
+      ),
+    ),
+  );
+}
+
 Widget background(int backgroundIndex, {double opacity = 1.0}) {
   final colors = backgroundColors[backgroundIndex];
   colors[0] = colors[0].withOpacity(opacity);

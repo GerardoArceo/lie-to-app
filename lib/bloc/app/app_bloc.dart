@@ -13,6 +13,10 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         state.isLoading.sink.add(event.loadingState);
       } else if (event is SetBluetoothState ) {
         state.bluetoothConected.sink.add(event.bluetoothState);
+      } else if (event is SetApiURL ) {
+        state.apiURL.sink.add(event.apiURL);
+      } else if (event is SetDiagnosisLiteState ) {
+        state.diagnosisLite.sink.add(event.diagnosisLite);
       }
 
     });

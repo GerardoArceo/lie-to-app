@@ -10,7 +10,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   GoogleSignInAccount? get user => _user;
   
-  Future signInWithGoogle() async {
+  Future signInWithGoogle(BuildContext context) async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
@@ -31,7 +31,7 @@ class GoogleSignInProvider extends ChangeNotifier {
         'email': user.email ?? "",
         'nickname': user.displayName ?? "",
       };
-      await CloudApiProvider().sendPostRequest(data, 'saveUser');
+      await CloudApiProvider().sendPostRequest(context, 'saveUser', data);
       
     } catch (e) {
       debugPrint(e.toString());

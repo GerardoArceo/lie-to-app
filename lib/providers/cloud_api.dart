@@ -3,20 +3,53 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
+import 'package:lie_to_app_2/bloc/app/app_bloc.dart';
+import 'package:lie_to_app_2/bloc/diagnosis/diagnosis_bloc.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 
 class CloudApiProvider {
 
   HttpClient client = HttpClient();
-  // final url ='https://liberatosoftware.com/lie-to-api/';
-  final url ='http://192.168.3.5:3003/';
 
-  sendDiagnosis(String? audioPath, List<int> bpmResults, List<int> eyeTrackingResults, String mode, {bool? fixedAnswer}) async{
-    if (audioPath == null) {
-      return null;
+  String _getServerURL(BuildContext context) {
+    final appBloc = BlocProvider.of<AppBloc>(context);
+    final server = appBloc.state.apiURLValue ?? 'Lili';
+    
+    switch (server) {
+      case 'Lili':
+        return 'http://192.168.3.6:3003/';
+      case 'Gera':
+        return 'http://192.168.3.5:3003/';
+      case 'LS':
+        return 'https://liberatosoftware.com/lie-to-api/';
+      default: 
+        return 'https://liberatosoftware.com/lie-to-api/';
     }
+  }
+
+  Future sendDiagnosis(BuildContext context, String mode, {bool? fixedAnswer}) async {
+    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
+    final appBloc = BlocProvider.of<AppBloc>(context);
+
+    if (appBloc.state.isDiagnosisLite! == true) {
+      final eyeTrackingResults = diagnosisBloc.state.eyeTrackingResultsValue ?? [];
+      Map<String, String> data = {
+        'eyeTrackingData': eyeTrackingResults.toString(),
+      };
+      if (fixedAnswer != null) data['fixedAnswer'] = fixedAnswer.toString();
+      return sendPostRequest(context, 'diagnosisLite', data);
+    }
+
+    final audioPath = diagnosisBloc.state.audioPathValue;
+    final bpmResults = diagnosisBloc.state.bpmResultsValue ?? [];
+    final eyeTrackingResults = diagnosisBloc.state.eyeTrackingResultsValue ?? [];
+
+    final url = _getServerURL(context);
+
+    if (audioPath == null) return null;
 
     final user = FirebaseAuth.instance.currentUser!;
     final uri = Uri.parse(url + 'diagnosis');
@@ -48,7 +81,9 @@ class CloudApiProvider {
     }
   }
 
-  Future sendPostRequest(Map<String, String>  data, String endpoint) async{
+  Future sendPostRequest(BuildContext context, String endpoint, Map<String, String>  data) async{
+    final url = _getServerURL(context);
+
     final user = FirebaseAuth.instance.currentUser!;
     data['uid'] = user.uid;
 
@@ -68,7 +103,9 @@ class CloudApiProvider {
     }
   }
 
-  Future sendGetRequest(Map<String, String>  data, String endpoint) async{
+  Future sendGetRequest(BuildContext context, Map<String, String> data, String endpoint) async{
+    final url = _getServerURL(context);
+
     final user = FirebaseAuth.instance.currentUser!;
     data['uid'] = user.uid;
 

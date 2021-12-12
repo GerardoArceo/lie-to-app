@@ -12,3 +12,13 @@ class SetBluetoothState extends AppEvent {
   final bool bluetoothState;
   SetBluetoothState(this.bluetoothState);
 }
+
+class SetApiURL extends AppEvent {
+  final String apiURL;
+  SetApiURL(this.apiURL);
+}
+
+class SetDiagnosisLiteState extends AppEvent {
+  final bool diagnosisLite;
+  SetDiagnosisLiteState(this.diagnosisLite);
+}

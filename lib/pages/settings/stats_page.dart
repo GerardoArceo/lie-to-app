@@ -18,7 +18,7 @@ class StatsPage extends StatelessWidget {
           Column(
             children: <Widget>[
               _title(),
-              _lista(),
+              _lista(context),
             ],
           ),
           backButton(context),
@@ -27,9 +27,9 @@ class StatsPage extends StatelessWidget {
     );
   }
 
-  Widget _lista(){
+  Widget _lista(BuildContext context) {
     return FutureBuilder(
-      future: CloudApiProvider().sendGetRequest({}, 'get_user_diagnosis'),
+      future: CloudApiProvider().sendGetRequest(context, {}, 'get_user_diagnosis'),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           return Column(children: [

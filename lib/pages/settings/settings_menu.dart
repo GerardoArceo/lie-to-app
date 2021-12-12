@@ -8,6 +8,7 @@ import 'package:lie_to_app_2/pages/settings/history_page.dart';
 import 'package:lie_to_app_2/pages/settings/stats_page.dart';
 import 'package:lie_to_app_2/providers/sign_in.dart';
 import 'package:lie_to_app_2/utils/utils.dart' as utils;
+import 'package:lie_to_app_2/pages/settings/settings_page.dart' as settings;
 import 'package:lie_to_app_2/utils/bluetooth.dart' as bluetooth;
 import 'package:lie_to_app_2/utils/utils.dart';
 import 'package:lie_to_app_2/widgets/rounded_button.dart';
@@ -106,7 +107,7 @@ class SettingsMenu extends StatelessWidget {
           return RoundedButton((){},_color, icon: Icons.all_inclusive_rounded, text: 'Error');
         } else {
           return RoundedButton(
-            () => Provider.of<GoogleSignInProvider>(context, listen: false).signInWithGoogle(),
+            () => Provider.of<GoogleSignInProvider>(context, listen: false).signInWithGoogle(context),
             _color, 
             icon: Icons.account_box, 
             text: 'Iniciar Sesión'
@@ -134,7 +135,7 @@ class SettingsMenu extends StatelessWidget {
         } else if (snapshot.hasError) { 
           return RoundedButton((){},_color, icon: Icons.all_inclusive_rounded, text: 'Error');
         } else {
-          f = () => utils.showNiceDialog(context, 'Oh, no', 'Necesitas iniciar sesión para utilizar esta función' , () => Provider.of<GoogleSignInProvider>(context, listen: false).signInWithGoogle(), 'Iniciar Sesión');
+          f = () => utils.showNiceDialog(context, 'Oh, no', 'Necesitas iniciar sesión para utilizar esta función' , () => Provider.of<GoogleSignInProvider>(context, listen: false).signInWithGoogle(context), 'Iniciar Sesión');
         }
         return RoundedButton(f, _color, icon: Icons.book, text: 'Historial');
       },
@@ -159,7 +160,7 @@ class SettingsMenu extends StatelessWidget {
         } else if (snapshot.hasError) { 
           return RoundedButton((){},_color, icon: Icons.all_inclusive_rounded, text: 'Error');
         } else {
-          f = () => utils.showNiceDialog(context, 'Oh, no', 'Necesitas iniciar sesión para utilizar esta función' , () => Provider.of<GoogleSignInProvider>(context, listen: false).signInWithGoogle(), 'Iniciar Sesión');
+          f = () => utils.showNiceDialog(context, 'Oh, no', 'Necesitas iniciar sesión para utilizar esta función' , () => Provider.of<GoogleSignInProvider>(context, listen: false).signInWithGoogle(context), 'Iniciar Sesión');
         }
         return RoundedButton(f, _color, icon: Icons.pie_chart_outlined, text: 'Estadísticas');
       },
@@ -179,7 +180,7 @@ class SettingsMenu extends StatelessWidget {
   Widget _settingsButton(context) {
     const _color = Color.fromRGBO(97, 120, 140, 1.0);
     return RoundedButton(
-      () => utils.showNiceDialog(context, 'Lie to App', 'www.gerardoarceo.com' , () => {}, 'Gracias por existir'), 
+      () => settings.showSettingsDialog(context),
       _color,
       icon: Icons.settings_applications, 
       text: 'Configuración'
@@ -187,5 +188,6 @@ class SettingsMenu extends StatelessWidget {
   }
 
   void setState(Null Function() param0) {}
-
 }
+
+

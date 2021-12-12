@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:lie_to_app_2/pages/main_page.dart';
+import 'package:lie_to_app_2/utils/utils.dart';
 
 const titleStyle = TextStyle(fontSize: 55.0, color: Colors.white );
 const subtitleStyle = TextStyle(fontSize: 25.0, color: Colors.white, fontStyle: FontStyle.italic);
@@ -29,11 +30,7 @@ Container page1() {
               const Text('El primer detector de', style: subtitleStyle, textAlign: TextAlign.center,),
               const Text('mentiras portátil y fiable', style: subtitleStyle, textAlign: TextAlign.center,),
               Expanded(child: Container()),
-              const Text(
-                'Lie to App',
-                style: TextStyle(fontSize: 60),
-                textAlign: TextAlign.center,
-              ),
+              gradientText('Lie to App', 60),
               const SizedBox( height: 10.0 ),
               const CircleAvatar(
                 backgroundColor: Colors.transparent,
@@ -41,11 +38,7 @@ Container page1() {
                 child: Image(image: AssetImage('assets/img/ai.png'),),
               ),
               const SizedBox(height: 15.0,),
-              const Text(
-                'El poder de la verdad en tu bolsillo',
-                style: TextStyle(fontSize: 20),
-                textAlign: TextAlign.center,
-              ),
+              gradientText('El poder de la verdad en tu bolsillo', 20),
               Expanded(child: Container()),
               Container(
                 margin: const EdgeInsets.all(8),

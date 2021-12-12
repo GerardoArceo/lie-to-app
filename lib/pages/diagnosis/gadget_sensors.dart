@@ -21,6 +21,9 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
   late BluetoothCharacteristic eyeTrackingCharacteristic;
   late BluetoothCharacteristic heartRateCharacteristic;
 
+  dynamic _subscription1;
+  dynamic _subscription2;
+
   bool isWidgetActive = true;
 
   int _bpm = 0; // beats per minute
@@ -37,8 +40,14 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
         _startReceiveGadgetData(context);
       } else {
         isWidgetActive = false;
-        await eyeTrackingCharacteristic.setNotifyValue(false);
-        await heartRateCharacteristic.setNotifyValue(false);
+        try {
+          _subscription1?.cancel();
+          _subscription2?.cancel();
+          await eyeTrackingCharacteristic.setNotifyValue(false);
+          await heartRateCharacteristic.setNotifyValue(false);
+        } catch (e) {
+          debugPrint("🦊 Error setting notify value: $e");
+        }
       }
     });
   }
@@ -122,8 +131,12 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
         debugPrint('🦊 ID CARACTERISTICA: ' + c.uuid.toString());
         if (c.uuid.toString() == 'beb5483e-36e1-4688-b7f5-ea07361b26a8') { // eye tracking
           eyeTrackingCharacteristic = c;
-          await eyeTrackingCharacteristic.setNotifyValue(true);
-          eyeTrackingCharacteristic.value.listen((value) {
+          try {
+            await eyeTrackingCharacteristic.setNotifyValue(true);
+          } catch (e) {
+            debugPrint("🦊 Error setting notify value: $e");
+          }
+          _subscription1 = eyeTrackingCharacteristic.value.listen((value) {
             final v = value.map((data) {
               if (data.isNaN || data == 0) return '';
               return data - 48;
@@ -145,9 +158,13 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
         }
         if (c.uuid.toString() == '7a807eb0-5583-11ec-bf63-0242ac130002') { // heart rate
           heartRateCharacteristic = c;
-          await heartRateCharacteristic.setNotifyValue(true);
+          try {
+            await heartRateCharacteristic.setNotifyValue(true);
+          } catch (e) {
+            debugPrint("🦊 Error setting notify value: $e");
+          }
           _updateBPM();
-          heartRateCharacteristic.value.listen((value) {
+          _subscription2 = heartRateCharacteristic.value.listen((value) {
             final v = value.map((data) {
               if (data.isNaN || data == 0) return '';
               return data - 48;
@@ -166,6 +183,7 @@ class GadgetSensorsView extends State<GadgetSensors> with SingleTickerProviderSt
               bpmResults.add(int.parse(v));
             }
           });
+          
         }
        
       }

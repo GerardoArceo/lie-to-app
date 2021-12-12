@@ -111,14 +111,10 @@ class PreviewPage extends StatelessWidget {
   
   _sendDiagnosis(BuildContext context, {bool? fixedAnswer}) async {
     final appBloc = BlocProvider.of<AppBloc>(context);
-    final diagnosisBloc = BlocProvider.of<DiagnosisBloc>(context);
     appBloc.add( SetLoadingState(true) );
 
     try {
-      final audioPath = diagnosisBloc.state.audioPathValue;
-      final bpmResults = diagnosisBloc.state.bpmResultsValue ?? [];
-      final eyeTrackingResults = diagnosisBloc.state.eyeTrackingResultsValue ?? [];
-      final res = await CloudApiProvider().sendDiagnosis(audioPath, bpmResults, eyeTrackingResults, mode ?? 'diagnosis', fixedAnswer: fixedAnswer);
+      final res = await CloudApiProvider().sendDiagnosis(context, mode ?? 'diagnosis', fixedAnswer: fixedAnswer);
       appBloc.add( SetLoadingState(false) );
 
       switch (mode) {

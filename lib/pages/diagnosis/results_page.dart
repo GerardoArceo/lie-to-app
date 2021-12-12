@@ -140,7 +140,7 @@ class _ResultsPageState extends State<ResultsPage> {
   _sendRetroalimentation(BuildContext context, bool result) async {
     final appBloc = BlocProvider.of<AppBloc>(context);
     appBloc.add( SetLoadingState(true) );
-    final r = await CloudApiProvider().sendPostRequest({'was_right': result.toString()}, 'retroalimentation');
+    final r = await CloudApiProvider().sendPostRequest(context, 'retroalimentation', {'was_right': result.toString()});
     if (r == true) {
       _resultSent = true;
       _retroText = 'Gracias por tu retroalimentación';
