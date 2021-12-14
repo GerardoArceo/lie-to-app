@@ -3,12 +3,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:lie_to_app_2/pages/main_page.dart';
 import 'package:lie_to_app_2/utils/utils.dart';
 
-const titleStyle = TextStyle(fontSize: 55.0, color: Colors.white );
-const subtitleStyle = TextStyle(fontSize: 25.0, color: Colors.white, fontStyle: FontStyle.italic);
+const titleStyle = TextStyle(fontSize: 40.0, color: Colors.white );
+const subtitleStyle = TextStyle(fontSize: 20.0, color: Colors.white, fontStyle: FontStyle.italic);
 const textStyle = TextStyle(fontSize: 15.0, color: Colors.white );
 const littleStyle = TextStyle(fontSize: 10.0, color: Colors.white );
 
-Container page1() {
+Container _page1() {
   return Container(
     width: double.infinity,
     height: double.infinity,
@@ -84,11 +84,19 @@ Container page1() {
 
 Container _page2() {
   return Container(
-    color: Colors.pinkAccent,
+    color: Colors.pink,
     child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          Image.asset(
+            "assets/img/2.png",
+            height: 400,
+            fit: BoxFit.contain,
+          ),
           Expanded(child: Container()),
           const Text('¿Qué lo hace diferente?', style: titleStyle, textAlign: TextAlign.center,),
           const SizedBox( height: 10.0 ),
@@ -106,7 +114,15 @@ Container _page3() {
     child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          Image.asset(
+            "assets/img/2.png",
+            height: 400,
+            fit: BoxFit.contain,
+          ),
           Expanded(child: Container()),
           const Text('¿Cómo funciona?', style: titleStyle, textAlign: TextAlign.center,),
           const SizedBox( height: 10.0 ),
@@ -120,11 +136,19 @@ Container _page3() {
 
 Container _page4() {
   return Container(
-    color: Colors.greenAccent,
+    color: const Color.fromRGBO(85, 190, 150, 1.0),
     child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          Image.asset(
+            "assets/img/2.png",
+            height: 400,
+            fit: BoxFit.contain,
+          ),
           Expanded(child: Container()),
           const Text('¿Para qué sirve?', style: titleStyle, textAlign: TextAlign.center,),
           const SizedBox( height: 10.0 ),
@@ -137,7 +161,7 @@ Container _page4() {
 }
 
 final liquidPages = [
-  page1(),
+  _page1(),
   _page2(),
   _page3(),
   _page4(),

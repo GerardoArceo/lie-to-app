@@ -28,7 +28,7 @@ class RoundedButton extends StatelessWidget {
           child: ClipRRect( 
             borderRadius: BorderRadius.circular(20.0),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+              filter: invisible ? ImageFilter.blur(sigmaX: 0, sigmaY: 0) : ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
               child: Container(
                 height: 180.0,
                 decoration: BoxDecoration(

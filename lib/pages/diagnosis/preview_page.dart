@@ -25,12 +25,14 @@ class PreviewPage extends StatelessWidget {
           ListView(
             children: <Widget>[
               _title(),
-              _bigButtonWidget(context),
+              Stack(children: [
+                _bigButtonWidget(context),
+                _hiddenButtons(context),
+              ],),
               _bpmResultsWidget(context),
               const SizedBox(height: 15.0),
               _eyeTrackingResultsWidget(context),
               const SimplePlayback(),
-              _hiddenButtons(context),
             ],
           ),
           backButton(context),

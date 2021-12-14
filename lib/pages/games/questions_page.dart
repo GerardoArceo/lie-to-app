@@ -32,8 +32,11 @@ class QuestionsPage extends StatelessWidget {
         questions = [
           {"title":"¿Alguna vez has cortado tu propio cabello?", "difficulty": 1},
           {"title":"¿Alguna vez has cantado mientras te bañas?", "difficulty": 1},
+          {"title":"¿Alguna vez has salido con alguien de tu trabajo?", "difficulty": 1},
           {"title":"¿Alguna vez has fingido tener novio o novia?", "difficulty": 2},
           {"title":"¿Alguna vez has pasado más de cinco días sin ducharte?", "difficulty": 2},
+          {"title":"¿Alguna vez has trabajado borracho o drogado?", "difficulty": 2},
+          {"title":"¿Alguna vez le has ocultado un chupetón a tus padres?", "difficulty": 2},
           {"title":"¿Alguna vez has dudado de tu orientación sexual?", "difficulty": 3},
           {"title":"¿Alguna vez has tapado el baño en la casa de alguien más?", "difficulty": 3},
         ];
@@ -42,9 +45,12 @@ class QuestionsPage extends StatelessWidget {
         questions = [
           {"title":"¿Alguna vez has hecho trampa en un examen", "difficulty": 1},
           {"title":"¿Alguna vez has mentido en tu CV?", "difficulty": 1},
+          {"title":"¿Alguna vez has intentado adivinar la contraseña de otra persona", "difficulty": 1},
+          {"title":"¿Alguna vez has descargado contenido pirata?", "difficulty": 1},
           {"title":"¿Alguna vez has disparado un arma de fuego?", "difficulty": 1},
           {"title":"¿Alguna vez has consumido drogas?", "difficulty": 2},
           {"title":"¿Alguna vez has robado en una tienda?", "difficulty": 2},
+          {"title":"¿Alguna vez le has robado dinero a tus padres?", "difficulty": 2},
           {"title":"¿Alguna vez te han arrestado?", "difficulty": 3},
         ];
         break;
@@ -55,14 +61,21 @@ class QuestionsPage extends StatelessWidget {
           {"title":"¿Alguna vez has aprendido a tocar un instrumento musical?", "difficulty": 1},
           {"title":"¿Alguna vez has pasado todo el día viendo videos divertidos en YouTube?", "difficulty": 2},
           {"title":"¿Alguna vez has puesto cara de pato al tomar una selfie?", "difficulty": 2},
+          {"title":"¿Alguna vez has estado despierto durante dos días seguidos?", "difficulty": 2},
+          {"title":"¿Alguna vez has llamado \"mamá\" a tu profesora?", "difficulty": 2},
+          {"title":"¿Alguna vez has olido tu propia ropa interior para ver si está limpia o sucia?", "difficulty": 2},
           {"title":"¿Alguna vez has fingido encontrarte mal para no ir a una reunión familiar?", "difficulty": 3},
         ];
         break;
       case 4: //Pareja
         questions = [
           {"title":"¿Alguna vez te has enamorado?", "difficulty": 1},
-          {"title":"¿Alguna vez has salido con alguien de tu trabajo?", "difficulty": 1},
+          {"title":"¿Alguna vez has hecho o recibido un baile erótico?", "difficulty": 1},
+          {"title":"¿Alguna vez has fingido un orgasmo?", "difficulty": 2},
           {"title":"¿Alguna vez has acosado al novio/novia de un ex en las redes sociales?", "difficulty": 2},
+          {"title":"¿Alguna vez le has dicho a alguien \"te amo\" sin querer?", "difficulty": 2},
+          {"title":"¿Alguna vez has utilizado una app de citas?", "difficulty": 2},
+          {"title":"¿Alguna vez has te has grabado con tu pareja teniendo sexo?", "difficulty": 3},
           {"title":"¿Alguna vez has enviado fotos sugerentes a alguien?", "difficulty": 3},
           {"title":"¿Alguna vez has sido infiel?", "difficulty": 3},
         ];
@@ -76,6 +89,8 @@ class QuestionsPage extends StatelessWidget {
           {"title":"¿Alguna vez has viajado en avión?", "difficulty": 1},
           {"title":"¿Eres egresado del MIT?", "difficulty": 1},
           {"title":"¿Alguna vez te has roto un hueso?", "difficulty": 1},
+          {"title":"¿Alguna vez has buscado en Google tu propio nombre?", "difficulty": 1},
+          {"title":"¿Alguna vez le has mentido a un ser querido?", "difficulty": 1},
         ];
         break;
       case 6: //Filosofía
@@ -84,7 +99,11 @@ class QuestionsPage extends StatelessWidget {
           {"title":"¿Alguna vez has sentido que una parte de tu cuerpo no te pertenece?", "difficulty": 1},
           {"title":"¿Crees que vivimos en un universo determinista?", "difficulty": 1},
           {"title":"¿Alguna vez has sentido que vivimos en una simulación?", "difficulty": 2},
+          {"title":"¿Crees que hay vida inteligente en otros planetas?", "difficulty": 2},
+          {"title":"¿Crees que es injusta la vida?", "difficulty": 2},
+          {"title":"¿Crees que hay vida después de la muerte?", "difficulty": 2},
           {"title":"¿Aluna vez has sentido que tu vida no tiene sentido?", "difficulty": 3},
+          {"title":"¿Crees que el fin justifica los medios?", "difficulty": 3},
         ];
         break;
     }

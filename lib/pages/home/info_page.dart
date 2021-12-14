@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lie_to_app_2/pages/main_page.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:lie_to_app_2/widgets/liquid_pages.dart';
 
@@ -20,7 +21,13 @@ class InfoPage extends StatelessWidget {
 
   pageChangeCallback(BuildContext context, int page) {
     if (page + 1 == liquidPages.length) {
-      Navigator.pushReplacementNamed(context, 'main');
+      Navigator.pushReplacement(
+        context, 
+        PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const MainPage(),
+            transitionDuration: Duration.zero,
+        ),
+    );
     }
   }
 
